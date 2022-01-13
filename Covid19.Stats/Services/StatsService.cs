@@ -20,11 +20,23 @@ namespace Covid19.Stats.Services
         public GlobalStatSummaryViewModel GetGlobalStat()
         {
             var lastData = getLastData();
-            var CasesSum = lastData.Sum(x => x.Confirmed);
-            var DeathSum = lastData.Sum(x => x.Deaths);
+            var casesSum = lastData.Sum(x => x.Confirmed);
+            var deathSum = lastData.Sum(x => x.Deaths);
 
-            return new GlobalStatSummaryViewModel() { Cases = CasesSum, Deaths = DeathSum };
-                
+            return new GlobalStatSummaryViewModel() { Cases = casesSum, Deaths = deathSum };   
+        }
+        public IEnumerable<CountrySummaryViewModel> GetCountriesStat()
+        {
+            return getLastData()
+                .GroupBy(
+                x => x.CountryRegion,
+                x => new { x.Confirmed, x.Deaths })
+                .Select(x => new CountrySummaryViewModel
+                {
+                    Country = x.Key,
+                    Confirmed = x.Sum(y => y.Confirmed),
+                    Deaths = x.Sum(y => y.Deaths),
+                });
         }
         private IQueryable<CovidStat> getLastData()
         {
