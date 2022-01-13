@@ -1,4 +1,6 @@
-﻿namespace Covid19.Stats.Data 
+﻿using System;
+
+namespace Covid19.Stats.Data 
 {
     public class CovidStat
     {
@@ -9,5 +11,7 @@
         public int Deaths { get; set; }
         public int Recovered { get; set; }
         public int Active { get; set; }
+        public DateTime DateTime { get; set; }
+
     }
 }
