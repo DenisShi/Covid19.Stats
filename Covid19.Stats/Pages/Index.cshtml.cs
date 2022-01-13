@@ -6,11 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Covid19.Stats.Services;
+using Covid19.Stats.Models;
+
 namespace Covid19.Stats.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly StatsService _service;
+        public GlobalStatSummaryViewModel GlobalStat { get; set; }
+        
         public IndexModel(StatsService service)
         {
             _service = service;
@@ -18,7 +22,7 @@ namespace Covid19.Stats.Pages
 
         public void OnGet()
         {
-
+            GlobalStat = _service.GetGlobalStat();
         }
     }
 }
