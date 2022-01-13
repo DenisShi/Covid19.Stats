@@ -8,4 +8,25 @@
     <h1 class="display-5">Total Coronavirus Cases: @Model.GlobalStat.Cases</h1>
     <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths</h1>
 
+    <div class="table-responsive">
+        <table class="table table-striped recipe">
+            <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>Confirmed</th>
+                    <th>Deaths</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var countryStat in Model.CountriesSummary)
+                {
+                    <tr>
+                        <td class="align-middle"><a href="notImplemented">@countryStat.Country</a></td>
+                        <td class="align-middle">@countryStat.Confirmed</td>
+                        <td class="align-middle">@countryStat.Deaths</td>
+                    </tr>       
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
