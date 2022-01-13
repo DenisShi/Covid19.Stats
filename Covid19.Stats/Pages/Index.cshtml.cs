@@ -12,11 +12,11 @@ namespace Covid19.Stats.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly StatsService _service;
+        private readonly LastDataStatsService _service;
         public GlobalStatSummaryViewModel GlobalStat { get; set; }
         public IEnumerable<CountrySummaryViewModel> CountriesSummary { get; set; }
         
-        public IndexModel(StatsService service)
+        public IndexModel(LastDataStatsService service)
         {
             _service = service;
         }

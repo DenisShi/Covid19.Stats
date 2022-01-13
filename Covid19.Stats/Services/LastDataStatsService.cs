@@ -9,10 +9,10 @@ using Covid19.Stats.Models;
 
 namespace Covid19.Stats.Services
 {
-    public class StatsService
+    public class LastDataStatsService
     {
         readonly AppDbContext _context;
-        public StatsService(AppDbContext context)
+        public LastDataStatsService(AppDbContext context)
         {
             _context = context;
         }

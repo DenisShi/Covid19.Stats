@@ -11,9 +11,9 @@ namespace Covid19.Stats.Pages.Сountries
 {
     public class IndexModel : PageModel
     {
-        StatsService _service;
+        LastDataStatsService _service;
         public CountrySummaryViewModel CountrySummary;
-        public IndexModel(StatsService service)
+        public IndexModel(LastDataStatsService service)
         {
             _service = service;
         }
