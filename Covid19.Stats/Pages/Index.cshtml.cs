@@ -5,16 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Covid19.Stats.Services;
 namespace Covid19.Stats.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        private readonly StatsService _service;
+        public IndexModel(StatsService service)
         {
-            _logger = logger;
+            _service = service;
         }
 
         public void OnGet()
