@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Covid19.Stats.Data;
 using Microsoft.EntityFrameworkCore;
+using Covid19.Stats.Services;
 
 namespace Covid19.Stats
 {
@@ -29,6 +30,8 @@ namespace Covid19.Stats
                 options.UseSqlite(Configuration.GetConnectionString("SqlLiteConnection"))
             );
             services.AddRazorPages();
+
+            services.AddScoped<StatsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
