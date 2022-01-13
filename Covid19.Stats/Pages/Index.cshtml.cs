@@ -14,6 +14,7 @@ namespace Covid19.Stats.Pages
     {
         private readonly StatsService _service;
         public GlobalStatSummaryViewModel GlobalStat { get; set; }
+        public IEnumerable<CountrySummaryViewModel> CountriesSummary { get; set; }
         
         public IndexModel(StatsService service)
         {
@@ -23,6 +24,7 @@ namespace Covid19.Stats.Pages
         public void OnGet()
         {
             GlobalStat = _service.GetGlobalStat();
+            CountriesSummary = _service.GetCountriesStat();
         }
     }
 }
