@@ -2,6 +2,7 @@
 {
     public class CovidStat
     {
+        public int Id { get; set; }
         public string ProvinceState { get; set; }
         public string CountryRegion { get; set; }
         public int Confirmed { get; set; }
