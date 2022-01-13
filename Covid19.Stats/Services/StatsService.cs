@@ -34,7 +34,7 @@ namespace Covid19.Stats.Services
                 .Select(x => new CountrySummaryViewModel
                 {
                     Country = x.Key,
-                    Confirmed = x.Sum(y => y.Confirmed),
+                    Cases = x.Sum(y => y.Confirmed),
                     Deaths = x.Sum(y => y.Deaths),
                 });
         }
@@ -48,7 +48,7 @@ namespace Covid19.Stats.Services
                 .Select(x => new CountrySummaryViewModel
                 {
                     Country = x.Key,
-                    Confirmed = x.Sum(y => y.Confirmed),
+                    Cases = x.Sum(y => y.Confirmed),
                     Deaths = x.Sum(y => y.Deaths),
                 }).FirstOrDefault();
         }
