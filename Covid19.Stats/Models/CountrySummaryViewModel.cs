@@ -8,7 +8,7 @@ namespace Covid19.Stats.Models
     public class CountrySummaryViewModel
     {
         public string Country { get; set; }
-        public int Confirmed { get; set; }
+        public int Cases { get; set; }
         public int Deaths { get; set; }
     }
 }
