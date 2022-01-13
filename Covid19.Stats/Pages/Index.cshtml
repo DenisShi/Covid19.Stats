@@ -21,7 +21,7 @@
                 @foreach (var countryStat in Model.CountriesSummary)
                 {
                     <tr>
-                        <td class="align-middle"><a href="notImplemented">@countryStat.Country</a></td>
+                        <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@countryStat.Country">@countryStat.Country</a></td>
                         <td class="align-middle">@countryStat.Cases</td>
                         <td class="align-middle">@countryStat.Deaths</td>
                     </tr>       
