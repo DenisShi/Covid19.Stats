@@ -1,4 +1,4 @@
-﻿namespace Covid19.Stats.Model
+﻿namespace Covid19.Stats.Data 
 {
     public class CovidStat
     {
