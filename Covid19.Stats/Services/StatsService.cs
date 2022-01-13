@@ -19,13 +19,17 @@ namespace Covid19.Stats.Services
 
         public GlobalStatSummaryViewModel GetGlobalStat()
         {
-            var lastData = _context.Stats
-                .Where(s => s.DateTime == _context.Stats.Max(x => x.DateTime));
+            var lastData = getLastData();
             var CasesSum = lastData.Sum(x => x.Confirmed);
             var DeathSum = lastData.Sum(x => x.Deaths);
 
             return new GlobalStatSummaryViewModel() { Cases = CasesSum, Deaths = DeathSum };
                 
+        }
+        private IQueryable<CovidStat> getLastData()
+        {
+            return _context.Stats
+                .Where(s => s.DateTime == _context.Stats.Max(x => x.DateTime));
         }
     }
 }
