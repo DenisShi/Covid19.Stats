@@ -1,0 +1,10 @@
+﻿@page "{country}"
+@model Covid19.Stats.Pages.Сountries.IndexModel
+@{
+    ViewData["Title"] = $"{Model.CountrySummary.Country} COVID-19";
+}
+<div class="text-center">
+    <h1 class="display-5">Country: @Model.CountrySummary.Country</h1>
+    <h1 class="display-5">Total Coronavirus Cases: @Model.CountrySummary.Cases</h1>
+    <h1 class="display-5">Total Deaths: @Model.CountrySummary.Deaths</h1>
+</div>
