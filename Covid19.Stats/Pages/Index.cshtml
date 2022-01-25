@@ -8,8 +8,8 @@
     <h1 class="display-5">Total Coronavirus Cases: @Model.GlobalStat.Cases</h1>
     <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths</h1>
 
-    <div class="table-responsive" >
-        <table class="table table-striped recipe table-hover">
+    <div class="table-responsive">
+        <table class="table table-striped recipe table-hover table_sort">
             <thead>
                 <tr>
                     <th class="th-sm">Country</th>
@@ -20,13 +20,16 @@
             <tbody>
                 @foreach (var countryStat in Model.CountriesSummary)
                 {
-                <tr>
-                    <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@countryStat.Country">@countryStat.Country</a></td>
-                    <td class="align-middle">@countryStat.Cases</td>
-                    <td class="align-middle">@countryStat.Deaths</td>
-                </tr>       
+                    <tr>
+                        <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@countryStat.Country">@countryStat.Country</a></td>
+                        <td class="align-middle">@countryStat.Cases</td>
+                        <td class="align-middle">@countryStat.Deaths</td>
+                    </tr>
+
                 }
             </tbody>
         </table>
     </div>
 </div>
+
+<script src="~/js/table_sort.js"></script>
