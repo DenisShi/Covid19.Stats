@@ -9,7 +9,8 @@
     <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths</h1>
 
     <div class="table-responsive">
-        <table class="table table-striped recipe table-hover table_sort">
+        <input class="form-control" type="text" placeholder="Search" id="search-text" onkeyup="tableSearch()">
+        <table class="table table-striped recipe table-hover table_sort" id="info-table">
             <thead>
                 <tr>
                     <th class="th-sm">Country</th>
@@ -32,4 +33,4 @@
     </div>
 </div>
 
-<script src="~/js/table_sort.js"></script>
+<script src="~/js/table.js"></script>
