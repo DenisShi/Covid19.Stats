@@ -19,11 +19,11 @@ namespace Covid19.Stats.Models
             return new StatSummaryViewModel
             {
                 Id = stat.Id,
-                ProvinceState = stat.ProvinceState,
-                CountryRegion = stat.CountryRegion,
+                ProvinceState = stat.Province_State,
+                CountryRegion = stat.Country_Region,
                 Confirmed = stat.Confirmed,
-                Deaths = stat.Deaths,
-                Date = $"{stat.DateTime.Day}.{stat.DateTime.Month}.{stat.DateTime.Year}"
+                Deaths = stat.Death,
+                Date = DateTime.Now.ToString()
             };
         }
     }

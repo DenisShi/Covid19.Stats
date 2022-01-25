@@ -21,7 +21,7 @@ namespace Covid19.Stats.Services
         {
             var lastData = getLastData();
             var casesSum = lastData.Sum(x => x.Confirmed);
-            var deathSum = lastData.Sum(x => x.Deaths);
+            var deathSum = lastData.Sum(x => x.Death);
 
             return new GlobalStatSummaryViewModel() { Cases = casesSum, Deaths = deathSum };   
         }
@@ -29,33 +29,33 @@ namespace Covid19.Stats.Services
         {
             return getLastData()
                 .GroupBy(
-                x => x.CountryRegion,
-                x => new { x.Confirmed, x.Deaths })
+                x => x.Country_Region,
+                x => new { x.Confirmed, x.Death })
                 .Select(x => new CountrySummaryViewModel
                 {
                     Country = x.Key,
                     Cases = x.Sum(y => y.Confirmed),
-                    Deaths = x.Sum(y => y.Deaths),
+                    Deaths = x.Sum(y => y.Death),
                 });
         }
         public CountrySummaryViewModel GetCountryStat(string country)
         {
             return getLastData()
-                .Where(x => x.CountryRegion == country)
+                .Where(x => x.Country_Region == country)
                 .GroupBy(
-                x => x.CountryRegion,
-                x => new { x.Confirmed, x.Deaths })
+                x => x.Country_Region,
+                x => new { x.Confirmed, x.Death })
                 .Select(x => new CountrySummaryViewModel
                 {
                     Country = x.Key,
                     Cases = x.Sum(y => y.Confirmed),
-                    Deaths = x.Sum(y => y.Deaths),
+                    Deaths = x.Sum(y => y.Death),
                 }).FirstOrDefault();
         }
         private IQueryable<CovidStat> getLastData()
         {
             return _context.Stats
-                .Where(s => s.DateTime == _context.Stats.Max(x => x.DateTime));
+                .Where(s => s.Last_Update == _context.Stats.Max(x => x.Last_Update));
         }
     }
 }

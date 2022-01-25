@@ -1,17 +1,21 @@
-﻿using System;
-
-namespace Covid19.Stats.Data 
+﻿namespace Covid19.Stats.Data
 {
     public class CovidStat
     {
         public int Id { get; set; }
-        public string ProvinceState { get; set; }
-        public string CountryRegion { get; set; }
+        public string FIPS { get; set; }
+        public string Admin2 { get; set; }
+        public string Province_State { get; set; }
+        public string Country_Region { get; set; }
+        public int Last_Update { get; set; }
+        public float Lat { get; set; }
+        public float Long { get; set; }
         public int Confirmed { get; set; }
-        public int Deaths { get; set; }
+        public int Death { get; set; }
         public int Recovered { get; set; }
         public int Active { get; set; }
-        public DateTime DateTime { get; set; }
-
+        public string Combined_key { get; set; }
+        public float Incident_Rate { get; set; }
+        public float Case_Fatality_Ratio { get; set; }
     }
 }
