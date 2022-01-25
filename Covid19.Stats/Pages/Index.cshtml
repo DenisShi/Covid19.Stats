@@ -8,23 +8,23 @@
     <h1 class="display-5">Total Coronavirus Cases: @Model.GlobalStat.Cases</h1>
     <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths</h1>
 
-    <div class="table-responsive">
-        <table class="table table-striped recipe">
+    <div class="table-responsive" >
+        <table class="table table-striped recipe table-hover">
             <thead>
                 <tr>
-                    <th>Country</th>
-                    <th>Confirmed</th>
-                    <th>Deaths</th>
+                    <th class="th-sm">Country</th>
+                    <th class="th-sm">Confirmed</th>
+                    <th class="th-sm">Deaths</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var countryStat in Model.CountriesSummary)
                 {
-                    <tr>
-                        <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@countryStat.Country">@countryStat.Country</a></td>
-                        <td class="align-middle">@countryStat.Cases</td>
-                        <td class="align-middle">@countryStat.Deaths</td>
-                    </tr>       
+                <tr>
+                    <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@countryStat.Country">@countryStat.Country</a></td>
+                    <td class="align-middle">@countryStat.Cases</td>
+                    <td class="align-middle">@countryStat.Deaths</td>
+                </tr>       
                 }
             </tbody>
         </table>

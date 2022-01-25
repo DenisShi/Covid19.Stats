@@ -30,13 +30,14 @@ namespace Covid19.Stats.Services
             return getLastData()
                 .GroupBy(
                 x => x.Country_Region,
-                x => new { x.Confirmed, x.Death })
+                x => new { x.Confirmed, x.Death})
                 .Select(x => new CountrySummaryViewModel
                 {
                     Country = x.Key,
                     Cases = x.Sum(y => y.Confirmed),
                     Deaths = x.Sum(y => y.Death),
-                });
+                }).
+                OrderByDescending(x => x.Cases);
         }
         public CountrySummaryViewModel GetCountryStat(string country)
         {
