@@ -17,13 +17,13 @@ namespace Covid19.Stats.Services
             _context = context;
         }
 
-        public GlobalStatSummaryViewModel GetGlobalStat()
+        public GlobalSummaryViewModel GetGlobalStat()
         {
             var lastData = getLastData();
             var casesSum = lastData.Sum(x => x.Confirmed);
             var deathSum = lastData.Sum(x => x.Death);
 
-            return new GlobalStatSummaryViewModel() { Cases = casesSum, Deaths = deathSum };   
+            return new GlobalSummaryViewModel() { Cases = casesSum, Deaths = deathSum };   
         }
         public IEnumerable<CountrySummaryViewModel> GetCountriesStat()
         {
