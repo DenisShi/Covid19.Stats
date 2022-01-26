@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Covid19.Stats.Models
 {
-    public class ChartSummaryViewModel
+    public struct DataPoint
     {
-        int Cases { get; set; }
-        int Deaths { get; set; }
-        DateTime Date { get; set; }
+        int Cases;
+        int Deaths;
+        DateTime Date;
     }
 }
