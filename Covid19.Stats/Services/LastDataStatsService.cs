@@ -11,6 +11,9 @@ namespace Covid19.Stats.Services
 {
     public class LastDataStatsService
     {
+        //Константа из-за особенности даты последнего обновления в базе (число секунд от 2010.01.01 00:00:00)
+        DateTime _startDate = new(2010, 1, 1, 0, 0, 0);
+
         readonly AppDbContext _context;
         public LastDataStatsService(AppDbContext context)
         {
@@ -23,7 +26,19 @@ namespace Covid19.Stats.Services
             var casesSum = lastData.Sum(x => x.Confirmed);
             var deathSum = lastData.Sum(x => x.Death);
 
-            return new GlobalSummaryViewModel() { Cases = casesSum, Deaths = deathSum };   
+            var dataPoints = _context.Stats
+                .GroupBy(
+                x => x.Last_Update,
+                x => new { x.Confirmed, x.Death })
+                .Select(x => new DataPoint
+                {
+                    Date = _startDate.AddSeconds(x.Key),
+                    Cases = x.Sum(y => y.Confirmed),
+                    Deaths = x.Sum(y => y.Death),
+                }
+                );
+
+            return new() { Cases = casesSum, Deaths = deathSum, dataPoints = dataPoints };   
         }
         public IEnumerable<CountrySummaryViewModel> GetCountriesStat()
         {

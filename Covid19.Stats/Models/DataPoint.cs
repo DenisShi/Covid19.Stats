@@ -7,8 +7,8 @@ namespace Covid19.Stats.Models
 {
     public struct DataPoint
     {
-        int Cases;
-        int Deaths;
-        DateTime Date;
+        public int Cases;
+        public int Deaths;
+        public DateTime Date;
     }
 }
