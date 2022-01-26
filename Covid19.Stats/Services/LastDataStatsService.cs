@@ -36,9 +36,9 @@ namespace Covid19.Stats.Services
                     Cases = x.Sum(y => y.Confirmed),
                     Deaths = x.Sum(y => y.Death),
                 }
-                );
+                ).OrderBy(x => x.Date);
 
-            return new() { Cases = casesSum, Deaths = deathSum, dataPoints = dataPoints };   
+            return new() { Cases = casesSum, Deaths = deathSum, DataPoints = dataPoints };   
         }
         public IEnumerable<CountrySummaryViewModel> GetCountriesStat()
         {
