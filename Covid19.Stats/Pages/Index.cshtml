@@ -6,31 +6,31 @@
 
 <div class="text-center">
     <h1 class="display-5">Total Coronavirus Cases: @Model.GlobalStat.Cases</h1>
-    <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths</h1>
+    <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths</h1> 
+</div>
 
-    <div class="table-responsive">
-        <input class="form-control" type="text" placeholder="Search" id="search-text" onkeyup="tableSearch()">
-        <table class="table table-striped recipe table-hover table_sort" id="info-table">
-            <thead>
+<div class="table-responsive">
+    <input class="form-control col-3 mt-4 mb-2  " type="text" placeholder="Search" id="search-text" onkeyup="tableSearch()">
+    <table class="table table-striped recipe table-hover table_sort" id="info-table">
+        <thead>
+            <tr>
+                <th class="th-sm">Country</th>
+                <th class="th-sm">Confirmed</th>
+                <th class="th-sm">Deaths</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var countryStat in Model.CountriesSummary)
+            {
                 <tr>
-                    <th class="th-sm">Country</th>
-                    <th class="th-sm">Confirmed</th>
-                    <th class="th-sm">Deaths</th>
+                    <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@countryStat.Country">@countryStat.Country</a></td>
+                    <td class="align-middle">@countryStat.Cases</td>
+                    <td class="align-middle">@countryStat.Deaths</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var countryStat in Model.CountriesSummary)
-                {
-                    <tr>
-                        <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@countryStat.Country">@countryStat.Country</a></td>
-                        <td class="align-middle">@countryStat.Cases</td>
-                        <td class="align-middle">@countryStat.Deaths</td>
-                    </tr>
 
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
 </div>
 
 <script src="~/js/table.js"></script>
