@@ -32,6 +32,7 @@ namespace Covid19.Stats
             services.AddRazorPages();
 
             services.AddScoped<GlobalStatService>();
+            services.AddScoped<CountryStatService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
