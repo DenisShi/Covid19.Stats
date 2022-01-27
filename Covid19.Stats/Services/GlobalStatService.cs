@@ -9,13 +9,13 @@ using Covid19.Stats.Models;
 
 namespace Covid19.Stats.Services
 {
-    public class LastDataStatsService
+    public class GlobalStatService
     {
         //Константа из-за особенности даты последнего обновления в базе (число секунд от 2010.01.01 00:00:00)
         DateTime _startDate = new(2010, 1, 1, 0, 0, 0);
 
         readonly AppDbContext _context;
-        public LastDataStatsService(AppDbContext context)
+        public GlobalStatService(AppDbContext context)
         {
             _context = context;
         }
