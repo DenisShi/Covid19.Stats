@@ -23,10 +23,11 @@ namespace Covid19.Stats.Services
         public GlobalSummaryViewModel GetGlobalStat()
         {
             var lastData = getLastData();
-            var casesSum = lastData.Sum(x => x.Confirmed);
-            var deathSum = lastData.Sum(x => x.Death);
-
-            var dataPoints = _context.Stats
+            return new() { 
+                Cases = lastData.Sum(x => x.Confirmed), 
+                Deaths = lastData.Sum(x => x.Death), 
+                DataPoints =
+                _context.Stats
                 .GroupBy(
                 x => x.Last_Update,
                 x => new { x.Confirmed, x.Death })
@@ -36,9 +37,8 @@ namespace Covid19.Stats.Services
                     Cases = x.Sum(y => y.Confirmed),
                     Deaths = x.Sum(y => y.Death),
                 }
-                ).OrderBy(x => x.Date);
-
-            return new() { Cases = casesSum, Deaths = deathSum, DataPoints = dataPoints };   
+                ).OrderBy(x => x.Date)
+        };   
         }
         public IEnumerable<CountrySummaryViewModel> GetCountriesStat()
         {
