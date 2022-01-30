@@ -4,6 +4,12 @@
     ViewData["Title"] = "COVID-19 Global statistics";
 }
 
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <div class="text-center">
     <h1 class="display-5">Total Coronavirus Cases: @Model.GlobalStat.Cases</h1>
     <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths</h1> 
@@ -33,4 +39,35 @@
     </table>
 </div>
 
+<script>
+    const labels =
+        @Json.Serialize(Model.GlobalStat.getDates())
+
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'COVID-19 Cases',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: @Json.Serialize(Model.GlobalStat.getCases()),
+        }]
+    };
+
+        const config = {
+        type: 'line',
+        data: data,
+        options: {}
+    };
+</script>
+
+<script>
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>
+
+
 <script src="~/js/table.js"></script>
+

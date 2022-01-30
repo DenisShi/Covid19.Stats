@@ -22,15 +22,18 @@ namespace Covid19.Stats.Services
                 DataPoints =
                 _context.Stats
                 .GroupBy(
-                x => x.Last_Update,
+                x => _startDate.AddSeconds(x.Last_Update).Date,
                 x => new { x.Confirmed, x.Death })
                 .Select(x => new DataPoint
                 {
-                    Date = _startDate.AddSeconds(x.Key),
+                    Date = x.Key,
                     Cases = x.Sum(y => y.Confirmed),
                     Deaths = x.Sum(y => y.Death),
                 }
                 ).OrderBy(x => x.Date)
+
+                
+                
         };   
         }
         public IEnumerable<CountrySummaryViewModel> GetCountriesStat()
