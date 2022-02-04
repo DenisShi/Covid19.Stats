@@ -45,13 +45,14 @@
 <script>
 
     const labels = @Json.Serialize(Model.GlobalStat.DataPoints.GetDates());
+    const defaultColor = 'rgb(0, 154, 207)'
 
     const casesData = {
         labels: labels,
         datasets: [{
             label: 'COVID-19 Cases',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: defaultColor,
+            borderColor: defaultColor,
             data: @Json.Serialize(Model.GlobalStat.DataPoints.GetCases()),
         }]
     };
@@ -60,8 +61,8 @@
         labels: labels,
         datasets: [{
             label: 'COVID-19 Deaths',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: defaultColor,
+            borderColor: defaultColor,
             data: @Json.Serialize(Model.GlobalStat.DataPoints.GetDeaths()),
         }]
     };
