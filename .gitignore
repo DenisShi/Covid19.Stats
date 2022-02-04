@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /Covid19.Stats/dataBaseCOVID.db
 /Covid19.Stats/Pages/test.cshtml
 /Covid19.Stats/Pages/test.cshtml.cs
+/Covid19.Stats/dataBaseCOVID_old.db
