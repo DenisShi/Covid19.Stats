@@ -10,5 +10,6 @@ namespace Covid19.Stats.Models
         public string Country { get; set; }
         public int Cases { get; set; }
         public int Deaths { get; set; }
+        public IEnumerable<DataPoint> DataPoints;
     }
 }

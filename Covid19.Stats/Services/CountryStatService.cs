@@ -14,17 +14,27 @@ namespace Covid19.Stats.Services
         public CountryStatService(AppDbContext context) : base(context) { }
         public CountrySummaryViewModel GetCountryStat(string country)
         {
-            return getLastData()
+            var lastData = getLastData()
+                .Where(x => x.Country_Region == country);
+            return new()
+            {
+                Country = country,
+                Cases = lastData.Sum(x => x.Confirmed),
+                Deaths = lastData.Sum(x => x.Death),
+                DataPoints =
+                _context.Stats
                 .Where(x => x.Country_Region == country)
                 .GroupBy(
-                x => x.Country_Region,
+                x => _startDate.AddSeconds(x.Date).Date,
                 x => new { x.Confirmed, x.Death })
-                .Select(x => new CountrySummaryViewModel
+                .Select(x => new DataPoint
                 {
-                    Country = x.Key,
+                    Date = x.Key,
                     Cases = x.Sum(y => y.Confirmed),
                     Deaths = x.Sum(y => y.Death),
-                }).FirstOrDefault();
+                }
+                ).OrderBy(x => x.Date)
+            };
         }
     }
 }
