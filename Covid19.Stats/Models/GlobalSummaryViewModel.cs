@@ -11,14 +11,5 @@ namespace Covid19.Stats.Models
          public int Cases { get; set; }
          public int Deaths { get; set; }
          public IEnumerable<DataPoint> DataPoints;
-         
-         public IEnumerable<string> getDates() 
-         {
-            return DataPoints.Select(x => x.Date.ToString());
-         }
-        public IEnumerable<int> getCases()
-        {
-            return DataPoints.Select(x => x.Cases);
-        }
     }
 }

@@ -22,7 +22,7 @@ namespace Covid19.Stats.Services
                 DataPoints =
                 _context.Stats
                 .GroupBy(
-                x => _startDate.AddSeconds(x.Last_Update).Date,
+                x => _startDate.AddSeconds(x.Date).Date,
                 x => new { x.Confirmed, x.Death })
                 .Select(x => new DataPoint
                 {

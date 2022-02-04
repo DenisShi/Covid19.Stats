@@ -4,15 +4,18 @@
     ViewData["Title"] = "COVID-19 Global statistics";
 }
 
-<div>
-    <canvas id="myChart"></canvas>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="text-center">
     <h1 class="display-5">Total Coronavirus Cases: @Model.GlobalStat.Cases</h1>
-    <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths</h1> 
+    <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths</h1>
+</div>
+<div>
+    <canvas id="casesChart"></canvas>
+</div>
+
+<div>
+    <canvas id="deathsChart"></canvas>
 </div>
 
 <div class="table-responsive">
@@ -40,34 +43,50 @@
 </div>
 
 <script>
-    const labels =
-        @Json.Serialize(Model.GlobalStat.getDates())
 
+    const labels = @Json.Serialize(Model.GlobalStat.DataPoints.GetDates());
 
-    const data = {
+    const casesData = {
         labels: labels,
         datasets: [{
             label: 'COVID-19 Cases',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: @Json.Serialize(Model.GlobalStat.getCases()),
+            data: @Json.Serialize(Model.GlobalStat.DataPoints.GetCases()),
         }]
     };
 
-        const config = {
-        type: 'line',
-        data: data,
+    const deathsData = {
+        labels: labels,
+        datasets: [{
+            label: 'COVID-19 Deaths',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: @Json.Serialize(Model.GlobalStat.DataPoints.GetDeaths()),
+        }]
+    };
+
+    const configCases = {
+        type: 'bar',
+        data: casesData,
         options: {}
     };
-</script>
+    const configDeaths = {
+         type: 'bar',
+         data: deathsData,
+         options: {}
+    };
 
-<script>
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
+    const casesChart = new Chart(
+        document.getElementById('casesChart'),
+        configCases
+    );
+
+    const deathsChart = new Chart(
+        document.getElementById('deathsChart'),
+        configDeaths
     );
 </script>
-
 
 <script src="~/js/table.js"></script>
 
