@@ -7,6 +7,7 @@
         public string Admin2 { get; set; }
         public string Province_State { get; set; }
         public string Country_Region { get; set; }
+        public int Date { get; set; }
         public int Last_Update { get; set; }
         public float Lat { get; set; }
         public float Long { get; set; }
