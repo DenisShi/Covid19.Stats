@@ -1,10 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "COVID-19 Global statistics";
-}
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    ViewData["Title"] = "COVID-19 Global statistics"; }
 
 <div class="text-center">
     <h1 class="display-5">Total Coronavirus Cases: @Model.GlobalStat.Cases</h1>
@@ -43,50 +40,15 @@
 </div>
 
 <script>
+    let labels = @Json.Serialize(Model.GlobalStat.DataPoints.GetDates());
+    let data = @Json.Serialize(Model.GlobalStat.DataPoints.GetCases());
+    let name = 'casesChart';
+    BuildBarChart(labels, data, name, "Cases Chart");
 
-    const labels = @Json.Serialize(Model.GlobalStat.DataPoints.GetDates());
-    const defaultColor = 'rgb(0, 154, 207)'
+    data = @Json.Serialize(Model.GlobalStat.DataPoints.GetDeaths());
+    name = 'deathsChart';
+    BuildBarChart(labels, data, name, "Deaths Chart");
 
-    const casesData = {
-        labels: labels,
-        datasets: [{
-            label: 'COVID-19 Cases',
-            backgroundColor: defaultColor,
-            borderColor: defaultColor,
-            data: @Json.Serialize(Model.GlobalStat.DataPoints.GetCases()),
-        }]
-    };
-
-    const deathsData = {
-        labels: labels,
-        datasets: [{
-            label: 'COVID-19 Deaths',
-            backgroundColor: defaultColor,
-            borderColor: defaultColor,
-            data: @Json.Serialize(Model.GlobalStat.DataPoints.GetDeaths()),
-        }]
-    };
-
-    const configCases = {
-        type: 'bar',
-        data: casesData,
-        options: {}
-    };
-    const configDeaths = {
-         type: 'bar',
-         data: deathsData,
-         options: {}
-    };
-
-    const casesChart = new Chart(
-        document.getElementById('casesChart'),
-        configCases
-    );
-
-    const deathsChart = new Chart(
-        document.getElementById('deathsChart'),
-        configDeaths
-    );
 </script>
 
 <script src="~/js/table.js"></script>
