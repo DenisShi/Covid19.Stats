@@ -16,7 +16,8 @@
         var data = google.visualization.arrayToDataTable(result);
 
         var options = {
-            colorAxis: { colors: ['red'] },
+            colorAxis: {colors: ['#5499C7', '#2471A3', '#1A5276', '#154360'] },
+            legend: 'none'
 
         };
 
