@@ -25,7 +25,7 @@ namespace Covid19.Stats.Services
                 _context.Stats
                 .Where(x => x.Country_Region == country)
                 .GroupBy(
-                x => x.Date2.Date,
+                x => x.Date.Date,
                 x => new { x.Confirmed, x.Death })
                 .Select(x => new DataPoint
                 {

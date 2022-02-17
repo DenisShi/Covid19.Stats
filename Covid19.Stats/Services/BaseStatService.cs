@@ -21,7 +21,7 @@ namespace Covid19.Stats.Services
         protected IQueryable<CovidStat> getLastData()
         {
             return _context.Stats
-                .Where(s => s.Date2 == _context.Stats.Max(x => x.Date2));
+                .Where(s => s.Date == _context.Stats.Max(x => x.Date));
         }
     }
 }
