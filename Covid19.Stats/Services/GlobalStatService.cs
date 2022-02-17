@@ -16,9 +16,10 @@ namespace Covid19.Stats.Services
         public GlobalSummaryViewModel GetGlobalStat()
         {
             var lastData = getLastData();
-            return new() { 
-                Cases = lastData.Sum(x => x.Confirmed), 
-                Deaths = lastData.Sum(x => x.Death), 
+            return new() {
+                Cases = lastData.Sum(x => x.Confirmed),
+                Deaths = lastData.Sum(x => x.Death),
+                LastUpdate = lastData.Max(x => x.Last_Update),
                 DataPoints =
                 _context.Stats
                 .GroupBy(
