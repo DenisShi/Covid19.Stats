@@ -1,4 +1,6 @@
-﻿namespace Covid19.Stats.Data
+﻿using System;
+
+namespace Covid19.Stats.Data
 {
     public class CovidStat
     {
@@ -18,5 +20,8 @@
         public string Combined_key { get; set; }
         public float Incident_Rate { get; set; }
         public float Case_Fatality_Ratio { get; set; }
+
+        public DateTime Date2 { get; set; }
+        public DateTime Last_Update2 { get; set; }
     }
 }
