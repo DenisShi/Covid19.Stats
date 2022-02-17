@@ -21,6 +21,7 @@ namespace Covid19.Stats.Services
                 Country = country,
                 Cases = lastData.Sum(x => x.Confirmed),
                 Deaths = lastData.Sum(x => x.Death),
+                LastUpdate = lastData.Max(x => x.Last_Update),
                 DataPoints =
                 _context.Stats
                 .Where(x => x.Country_Region == country)
