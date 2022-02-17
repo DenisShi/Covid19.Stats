@@ -17,7 +17,8 @@
 
 <!-- #endregion -->
 <!-- #region Map -->
-<div id="regions_div" class="d-flex justify-content-center"></div>
+<div id="cases_map" class="d-flex justify-content-center"></div>
+<div id="deaths_map" class="d-flex justify-content-center"></div>
 <!-- #endregion -->
 <!-- #region Charts -->
 
@@ -78,8 +79,13 @@
 <script>
     BuildGeoChart(
         ['Country', 'Cases'],
-        @Json.Serialize(Model.CountriesSummary.GetMapInfo()),
-        'regions_div'
+        @Json.Serialize(Model.CountriesSummary.GetCasesMapInfo()),
+        'cases_map'
+    )
+     BuildGeoChart(
+        ['Country', 'Deaths'],
+        @Json.Serialize(Model.CountriesSummary.GetDeathsMapInfo()),
+        'deaths_map'
     )
 </script>
 <!-- #endregion -->
