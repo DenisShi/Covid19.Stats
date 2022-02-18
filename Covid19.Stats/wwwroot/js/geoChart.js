@@ -17,8 +17,9 @@
 
         var options = {
             colorAxis: {colors: ['#5499C7', '#2471A3', '#1A5276', '#154360'] },
-            legend: 'none'
-
+            legend: 'none',
+            width: 1366,
+            height: 768
         };
 
         var chart = new google.visualization.GeoChart(document.getElementById(canvas_id));

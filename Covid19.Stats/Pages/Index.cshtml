@@ -6,7 +6,7 @@
 
 <script src="~/js/geoChart.js"></script>
 
-@*<div id="regions_div"></div>*@
+
 <!-- #region Total -->
 
 <div class="text-center">
@@ -16,19 +16,26 @@
 </div>
 
 <!-- #endregion -->
-<!-- #region Map -->
-<div id="cases_map" class="d-flex justify-content-center"></div>
-<div id="deaths_map" class="d-flex justify-content-center"></div>
+<!-- #region toggle Cases/Deaths -->
+<p>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseCases multiCollapseDeaths">Cases/Deaths</button>
+</p>
+
+<!-- #region Cases -->
+
+    <div class="collapse multi-collapse show" id="multiCollapseCases">
+        <div id="cases_map" class="d-flex justify-content-center"></div>
+        <div><canvas id="casesChart"></canvas></div>
+    </div>
+
 <!-- #endregion -->
-<!-- #region Charts -->
+<!-- #region Deaths -->
+    <div class="collapse multi-collapse " id="multiCollapseDeaths">
+        <div id="deaths_map" class="d-flex justify-content-center"></div>
+        <div><canvas id="deathsChart"></canvas></div>
+    </div>
 
-<div>
-    <canvas id="casesChart"></canvas>
-</div>
-
-<div>
-    <canvas id="deathsChart"></canvas>
-</div>
+<!-- #endregion -->
 
 <!-- #endregion -->
 <!-- #region Table -->
@@ -57,6 +64,7 @@
 </div>
 
 <!-- #endregion -->
+
 <!-- #region scripts -->
 <!-- #region Charts init -->
 
