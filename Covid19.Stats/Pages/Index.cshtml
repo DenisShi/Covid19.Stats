@@ -86,8 +86,8 @@
 <!-- #region Map Init -->
 <script>
     BuildGeoChart(
-        ['Country', 'Cases'],
-        @Json.Serialize(Model.CountriesSummary.GetCasesMapInfo()),
+        ['Country', 'Cases', 'Deaths'],
+        @Json.Serialize(Model.CountriesSummary.GetMapInfo()),
         'cases_map'
     )
      BuildGeoChart(

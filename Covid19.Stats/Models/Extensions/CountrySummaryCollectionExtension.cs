@@ -26,5 +26,14 @@ namespace Covid19
             }
             return pairs;
         }
+
+        public static List<(string, int, int)> GetMapInfo(this IEnumerable<CountrySummaryViewModel> countrySummaries)
+        {
+            var ps = new List<(string, int, int)>();
+            foreach (var cs in countrySummaries)
+                ps.Add((cs.Country, cs.Cases, cs.Deaths));
+
+            return ps;
+        }
     }
 }
