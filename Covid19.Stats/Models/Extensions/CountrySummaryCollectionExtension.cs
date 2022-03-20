@@ -7,7 +7,7 @@ namespace Covid19
 {
     public static class CountrySummaryCollectionExtension
     {
-        public static Dictionary<string, int> GetCasesMapInfo(this IEnumerable<CountrySummaryViewModel> countrySummaries)
+        public static Dictionary<string, int> GetCasesMapInfo(this IEnumerable<GlobalCountrySummaryViewModel> countrySummaries)
         {
             Dictionary<string, int> pairs = new();
             foreach (var cs in countrySummaries)
@@ -17,7 +17,7 @@ namespace Covid19
             return pairs;
         }
 
-        public static Dictionary<string, int> GetDeathsMapInfo(this IEnumerable<CountrySummaryViewModel> countrySummaries)
+        public static Dictionary<string, int> GetDeathsMapInfo(this IEnumerable<GlobalCountrySummaryViewModel> countrySummaries)
         {
             Dictionary<string, int> pairs = new();
             foreach (var cs in countrySummaries)
@@ -27,7 +27,7 @@ namespace Covid19
             return pairs;
         }
 
-        public static List<(string, int, int)> GetMapInfo(this IEnumerable<CountrySummaryViewModel> countrySummaries)
+        public static List<(string, int, int)> GetMapInfo(this IEnumerable<GlobalCountrySummaryViewModel> countrySummaries)
         {
             var ps = new List<(string, int, int)>();
             foreach (var cs in countrySummaries)

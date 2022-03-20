@@ -16,10 +16,13 @@ namespace Covid19.Stats.Services
         public GlobalSummaryViewModel GetGlobalStat()
         {
             var lastData = getLastData();
+            var penultData = getPenultData();
             return new() {
                 Cases = lastData.Sum(x => x.Confirmed),
                 Deaths = lastData.Sum(x => x.Death),
                 LastUpdate = lastData.Max(x => x.Last_Update),
+                CasesDelta = lastData.Sum(x => x.Confirmed) - penultData.Sum(x => x.Confirmed),
+                DeathsDelta = lastData.Sum(x => x.Death) - penultData.Sum(x => x.Death),
                 DataPoints =
                 _context.Stats
                 .GroupBy(
@@ -34,19 +37,55 @@ namespace Covid19.Stats.Services
                 ).OrderBy(x => x.Date)   
         };   
         }
-        public IEnumerable<CountrySummaryViewModel> GetCountriesStat()
+        public IEnumerable<GlobalCountrySummaryViewModel> GetCountriesStat()
         {
-            return getLastData()
-                .GroupBy(
-                x => x.Country_Region,
-                x => new { x.Confirmed, x.Death})
-                .Select(x => new CountrySummaryViewModel
-                {
-                    Country = x.Key,
-                    Cases = x.Sum(y => y.Confirmed),
-                    Deaths = x.Sum(y => y.Death),
-                }).
-                OrderByDescending(x => x.Cases);
+            #region PrepareData
+            var lastData = getLastData()
+                    .GroupBy(
+                    x => x.Country_Region,
+                    x => new { x.Confirmed, x.Death })
+                    .Select(x => new
+                    {
+                        Country = x.Key,
+                        Cases = x.Sum(y => y.Confirmed),
+                        Deaths = x.Sum(y => y.Death),
+                    });
+            var penultData = getPenultData()
+                    .GroupBy(
+                    x => x.Country_Region,
+                    x => new { x.Confirmed, x.Death })
+                    .Select(x => new
+                    {
+                        Country = x.Key,
+                        Cases = x.Sum(y => y.Confirmed),
+                        Deaths = x.Sum(y => y.Death),
+                    });
+            #endregion
+            var joinedData = lastData.Join(penultData,
+                    f => f.Country,
+                    s => s.Country,
+                    (f, s) => new GlobalCountrySummaryViewModel
+                    {
+                        Country = f.Country,
+                        Cases = f.Cases,
+                        CasesDelta = f.Cases - s.Cases,
+                        Deaths = f.Deaths,
+                        DeathsDelta = f.Deaths - s.Deaths
+                    }
+                    ).OrderByDescending(x => x.Cases);
+           
+            return joinedData;
+            //return getLastData()
+            //    .GroupBy(
+            //    x => x.Country_Region,
+            //    x => new { x.Confirmed, x.Death})
+            //    .Select(x => new CountrySummaryViewModel
+            //    {
+            //        Country = x.Key,
+            //        Cases = x.Sum(y => y.Confirmed),
+            //        Deaths = x.Sum(y => y.Death),
+            //    }).
+            //    OrderByDescending(x => x.Cases);
         }
 
     }

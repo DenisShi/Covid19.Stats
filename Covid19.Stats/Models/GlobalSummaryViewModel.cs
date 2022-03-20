@@ -10,6 +10,9 @@ namespace Covid19.Stats.Models
     {
          public int Cases { get; set; }
          public int Deaths { get; set; }
+         public int CasesDelta { get; set; }
+         public int DeathsDelta { get; set; }
+
          public DateTime LastUpdate { get; set; }
          public IEnumerable<DataPoint> DataPoints;
     }

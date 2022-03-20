@@ -11,7 +11,7 @@ namespace Covid19.Stats.Services
     public class BaseStatService
     {
         //Константа из-за особенности даты последнего обновления в базе (число секунд от 2010.01.01 00:00:00)
-        protected readonly DateTime _startDate = new(2010, 1, 1, 0, 0, 0);
+        //protected readonly DateTime _startDate = new(2010, 1, 1, 0, 0, 0);
         protected readonly AppDbContext _context;
         public BaseStatService(AppDbContext context)
         {
@@ -22,6 +22,12 @@ namespace Covid19.Stats.Services
         {
             return _context.Stats
                 .Where(s => s.Date == _context.Stats.Max(x => x.Date));
+        }
+
+        protected IQueryable<CovidStat> getPenultData()
+        {
+            return _context.Stats
+                .Where(s => s.Date == _context.Stats.Max(x => x.Date).AddDays(-1));
         }
     }
 }
