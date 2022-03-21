@@ -75,6 +75,10 @@
         'casesChart',
         "Cases Chart");
 
+    @*let test = @Model.GlobalStat.Params.BarChartCases;*@
+
+    @*BuildBarChart(@Model.GlobalStat.Params.BarChartCases);*@
+
     BuildBarChart(labels,
         @Json.Serialize(Model.GlobalStat.DataPoints.GetDeaths()),
         'deathsChart',
