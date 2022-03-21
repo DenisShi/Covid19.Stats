@@ -17,15 +17,17 @@ namespace Covid19.Stats.Services
         {
             var lastData = getLastData();
             var penultData = getPenultData();
+            var Cases = lastData.Sum(x => x.Confirmed);
+            var Deaths = lastData.Sum(x => x.Death);
             return new() {
-                Cases = lastData.Sum(x => x.Confirmed),
-                Deaths = lastData.Sum(x => x.Death),
+                Cases = Cases,
+                Deaths = Deaths,
                 LastUpdate = lastData.Max(x => x.Last_Update),
-                CasesDelta = lastData.Sum(x => x.Confirmed) - penultData.Sum(x => x.Confirmed),
-                DeathsDelta = lastData.Sum(x => x.Death) - penultData.Sum(x => x.Death),
+                CasesDelta = Cases - penultData.Sum(x => x.Confirmed),
+                DeathsDelta = Deaths - penultData.Sum(x => x.Death),
                 DataPoints =
                 _context.Stats
-                .GroupBy(
+                .GroupBy(   
                 x => x.Date,
                 x => new { x.Confirmed, x.Death })
                 .Select(x => new DataPoint
