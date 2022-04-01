@@ -31,6 +31,7 @@ namespace Covid19.Stats.Services
                 DeathsDelta = Deaths - penultData.Sum(x => x.Death),
                 DataPoints =
                 _context.Stats
+                .Where(x => x.Country_Region == country)
                 .GroupBy(
                 x => x.Date,
                 x => new { x.Confirmed, x.Death })
