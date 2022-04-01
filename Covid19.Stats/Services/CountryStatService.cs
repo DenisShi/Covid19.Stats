@@ -11,7 +11,11 @@ namespace Covid19.Stats.Services
 {
     public class CountryStatService : BaseStatService
     {
-        public CountryStatService(AppDbContext context) : base(context) { }
+        DataPointsSelector _dataPointsSelector;
+        public CountryStatService(AppDbContext context, DataPointsSelector dataPointsSelector) : base(context) 
+        {
+            _dataPointsSelector = dataPointsSelector;
+        }
         public CountrySummaryViewModel GetCountryStat(string country)
         {
             var lastData = getLastData()
@@ -29,19 +33,7 @@ namespace Covid19.Stats.Services
                 LastUpdate = lastData.Max(x => x.Last_Update),
                 CasesDelta = Cases - penultData.Sum(x => x.Confirmed),
                 DeathsDelta = Deaths - penultData.Sum(x => x.Death),
-                DataPoints =
-                _context.Stats
-                .Where(x => x.Country_Region == country)
-                .GroupBy(
-                x => x.Date,
-                x => new { x.Confirmed, x.Death })
-                .Select(x => new DataPoint
-                {
-                    Date = x.Key,
-                    Cases = x.Sum(y => y.Confirmed),
-                    Deaths = x.Sum(y => y.Death),
-                }
-                ).OrderBy(x => x.Date)
+                DataPoints = _dataPointsSelector.GetAll(country)
             };
         }
     }

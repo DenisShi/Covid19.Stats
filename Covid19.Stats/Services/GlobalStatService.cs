@@ -29,18 +29,7 @@ namespace Covid19.Stats.Services
                 LastUpdate = lastData.Max(x => x.Last_Update),
                 CasesDelta = Cases - penultData.Sum(x => x.Confirmed),
                 DeathsDelta = Deaths - penultData.Sum(x => x.Death),
-                DataPoints =
-                _context.Stats
-                .GroupBy(   
-                x => x.Date,
-                x => new { x.Confirmed, x.Death })
-                .Select(x => new DataPoint
-                {
-                    Date = x.Key,
-                    Cases = x.Sum(y => y.Confirmed),
-                    Deaths = x.Sum(y => y.Death),
-                }
-                ).OrderBy(x => x.Date)   
+                DataPoints = _dataPointsSelector.GetAll()
         };   
         }
         public IEnumerable<GlobalCountrySummaryViewModel> GetCountriesStat()
