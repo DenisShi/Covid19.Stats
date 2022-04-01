@@ -15,5 +15,7 @@ namespace Covid19.Stats.Models
 
         public DateTime LastUpdate { get; set; }
         public IEnumerable<DataPoint> DataPoints;
+        public IEnumerable<DataPoint> DataPointsWeekly;
+        public IEnumerable<DataPoint> DataPointsMonthly;
     }
 }
