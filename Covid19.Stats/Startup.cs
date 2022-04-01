@@ -33,6 +33,7 @@ namespace Covid19.Stats
 
             services.AddScoped<GlobalStatService>();
             services.AddScoped<CountryStatService>();
+            services.AddScoped<DataPointsSelector>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

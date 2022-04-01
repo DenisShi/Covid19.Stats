@@ -11,7 +11,11 @@ namespace Covid19.Stats.Services
 {
     public class GlobalStatService : BaseStatService
     {
-        public GlobalStatService(AppDbContext context) : base(context) { }
+        private DataPointsSelector _dataPointsSelector;
+        public GlobalStatService(AppDbContext context, DataPointsSelector dataPointsSelector) : base(context) 
+        {
+            _dataPointsSelector = dataPointsSelector;
+        }
 
         public GlobalSummaryViewModel GetGlobalStat()
         {
