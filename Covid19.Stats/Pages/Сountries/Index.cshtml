@@ -19,6 +19,14 @@
     <canvas id="deathsChart"></canvas>
 </div>
 
+<div>
+    <canvas id="casesMonthlyChart"></canvas>
+</div>
+
+<div>
+    <canvas id="deathsMonthlyChart"></canvas>
+</div>
+
 <script>
     let labels = @Json.Serialize(Model.CountrySummary.DataPoints.GetDates());
     let data = @Json.Serialize(Model.CountrySummary.DataPoints.GetCases());
@@ -28,4 +36,18 @@
     data = @Json.Serialize(Model.CountrySummary.DataPoints.GetDeaths());
     name = 'deathsChart';
     BuildBarChart(labels, data, name, "Deaths Chart");
+
+    labels = @Json.Serialize(Model.CountrySummary.DataPointsMonthly.GetDates());
+    BuildBarChart(labels,
+        @Json.Serialize(Model.CountrySummary.DataPointsMonthly.GetCases()),
+        'casesMonthlyChart',
+        'Cases Monthly Chart'
+    )
+    BuildBarChart(labels,
+        @Json.Serialize(Model.CountrySummary.DataPointsMonthly.GetDeaths()),
+        'deathsMonthlyChart',
+        'Deaths Monthly Chart'
+    )
+
+
 </script>

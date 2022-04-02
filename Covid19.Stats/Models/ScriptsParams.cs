@@ -8,6 +8,8 @@ namespace Covid19.Stats.Models
     public class GlobalScriptsParams
     {
         public string BarChartCases;
+        public string BarChartCasesMonthly;
+        public string BarChartCasesWeekly;
         public string BarChartDeaths;
         public string MapCases;
         public string MapDeaths;

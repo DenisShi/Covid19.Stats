@@ -16,6 +16,8 @@ namespace Covid19.Stats.Models
         public int DeathsDelta { get; set; }
         public DateTime LastUpdate { get; set; }
         public IEnumerable<DataPoint> DataPoints;
+        public IEnumerable<DataPoint> DataPointsMonthly;
+        public IEnumerable<DataPoint> DataPointsWeekly;
         public GlobalScriptsParams Params { get; set; }
         public void InitParams()
         {

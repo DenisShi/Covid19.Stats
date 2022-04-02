@@ -29,8 +29,10 @@ namespace Covid19.Stats.Services
                 LastUpdate = lastData.Max(x => x.Last_Update),
                 CasesDelta = Cases - penultData.Sum(x => x.Confirmed),
                 DeathsDelta = Deaths - penultData.Sum(x => x.Death),
-                DataPoints = _dataPointsSelector.GetAll()
-        };   
+
+                DataPoints = _dataPointsSelector.GetAll(),
+                DataPointsMonthly = _dataPointsSelector.GetMonthly()
+            };   
         }
         public IEnumerable<GlobalCountrySummaryViewModel> GetCountriesStat()
         {

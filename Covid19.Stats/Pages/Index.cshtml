@@ -6,6 +6,8 @@
 
 <script src="~/js/geoChart.js"></script>
 
+<h1>@Model.GlobalStat.DataPointsMonthly.FirstOrDefault().Cases</h1>
+
 
 <!-- #region Total -->
 
@@ -23,20 +25,24 @@
 
 <!-- #region Cases -->
 
-    <div class="collapse multi-collapse show" id="multiCollapseCases">
-        <div id="cases_map" class="d-flex justify-content-center"></div>
-        <div><canvas id="casesChart"></canvas></div>
-    </div>
+<div class="collapse multi-collapse show" id="multiCollapseCases">
+    <div id="cases_map" class="d-flex justify-content-center"></div>
+    <div><canvas id="casesChart"></canvas></div>
+</div>
 
 <!-- #endregion -->
 <!-- #region Deaths -->
-    <div class="collapse multi-collapse " id="multiCollapseDeaths">
-        <div id="deaths_map" class="d-flex justify-content-center"></div>
-        <div><canvas id="deathsChart"></canvas></div>
-    </div>
+<div class="collapse multi-collapse " id="multiCollapseDeaths">
+    <div id="deaths_map" class="d-flex justify-content-center"></div>
+    <div><canvas id="deathsChart"></canvas></div>
+</div>
 
 <!-- #endregion -->
-
+<!-- #region Monthly Cases -->
+<div><canvas id="casesChartMonthly"></canvas></div>
+<!-- #endregion -->
+<!-- #region Monthly Deaths -->
+<!-- #endregion -->
 <!-- #endregion -->
 <!-- #region Table -->
 
@@ -64,7 +70,10 @@
 </div>
 
 <!-- #endregion -->
-
+<!-- #region Monthly Charts -->
+<div><canvas id="casesMonthlyChart"></canvas></div>
+<div><canvas id="deathsMonthlyChart"></canvas></div>
+<!-- #endregion -->
 <!-- #region scripts -->
 <!-- #region Charts init -->
 
@@ -83,6 +92,15 @@
         @Json.Serialize(Model.GlobalStat.DataPoints.GetDeaths()),
         'deathsChart',
         "Deaths Chart");
+    labels = @Json.Serialize(Model.GlobalStat.DataPointsMonthly.GetDates());
+    BuildBarChart(labels,
+        @Json.Serialize(Model.GlobalStat.DataPointsMonthly.GetCases()),
+        'casesMonthlyChart',
+        "Cases Monthly Chart");
+    BuildBarChart(labels,
+        @Json.Serialize(Model.GlobalStat.DataPointsMonthly.GetDeaths()),
+        'deathsMonthlyChart',
+        "Deaths Monthly Chart");
 
 </script>
 
