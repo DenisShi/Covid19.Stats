@@ -70,9 +70,10 @@
 </div>
 
 <!-- #endregion -->
-<!-- #region Monthly Charts -->
+<!-- #region test Charts -->
 <div><canvas id="casesMonthlyChart"></canvas></div>
 <div><canvas id="deathsMonthlyChart"></canvas></div>
+<div><canvas id="casesWeeklyChart"></canvas></div>
 <!-- #endregion -->
 <!-- #region scripts -->
 <!-- #region Charts init -->
@@ -83,15 +84,11 @@
         @Json.Serialize(Model.GlobalStat.DataPoints.GetCases()),
         'casesChart',
         "Cases Chart");
-
-    @*let test = @Model.GlobalStat.Params.BarChartCases;*@
-
-    @*BuildBarChart(@Model.GlobalStat.Params.BarChartCases);*@
-
     BuildBarChart(labels,
         @Json.Serialize(Model.GlobalStat.DataPoints.GetDeaths()),
         'deathsChart',
         "Deaths Chart");
+
     labels = @Json.Serialize(Model.GlobalStat.DataPointsMonthly.GetDates());
     BuildBarChart(labels,
         @Json.Serialize(Model.GlobalStat.DataPointsMonthly.GetCases()),
@@ -101,6 +98,18 @@
         @Json.Serialize(Model.GlobalStat.DataPointsMonthly.GetDeaths()),
         'deathsMonthlyChart',
         "Deaths Monthly Chart");
+
+    labels = @Json.Serialize(Model.GlobalStat.DataPointsWeekly.GetDates());
+    BuildBarChart(labels,
+        @Json.Serialize(Model.GlobalStat.DataPointsWeekly.GetDeaths()),
+        'casesWeeklyChart',
+        "cases Weekly Chart");
+
+
+
+    @* let test = @Model.GlobalStat.Params.BarChartCases;*@
+
+    @* BuildBarChart(@Model.GlobalStat.Params.BarChartCases);*@
 
 </script>
 

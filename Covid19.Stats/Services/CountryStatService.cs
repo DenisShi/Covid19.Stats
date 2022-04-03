@@ -35,7 +35,8 @@ namespace Covid19.Stats.Services
                 DeathsDelta = Deaths - penultData.Sum(x => x.Death),
 
                 DataPoints = _dataPointsSelector.GetAll(country),
-                DataPointsMonthly = _dataPointsSelector.GetMonthly(country)
+                DataPointsMonthly = _dataPointsSelector.GetMonthly(country),
+                DataPointsWeekly = _dataPointsSelector.GetWeekly(country)
             };
         }
     }

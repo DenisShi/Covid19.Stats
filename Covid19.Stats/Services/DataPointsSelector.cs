@@ -57,5 +57,31 @@ namespace Covid19.Stats.Services
                 ).AsEnumerable().OrderBy(x => x.Cases);
         }
 
+        public IEnumerable<DataPoint> GetWeekly(string country = null)
+        {
+            var stats = country == null ? _context.Stats : _context.Stats.Where(x => x.Country_Region == country);
+            DateTime firstDay = new(2020, 05, 30);
+
+
+            return stats
+                .Select(x => new
+                {
+                    x.Date,
+                    x.Confirmed,
+                    x.Death
+                }
+                ).AsEnumerable()
+                .GroupBy(
+                x => new { WeekNumber = (x.Date - firstDay) / 7 },
+                (key, group) => new DataPoint
+                {
+                    Date = new DateTime(2000, 10, 10),
+                    Cases = group.Sum(y => y.Confirmed),
+                    Deaths = group.Sum(y => y.Death)
+                }
+                ).AsEnumerable().OrderBy(x => x.Cases);
+        }
+
+
     }
 }
