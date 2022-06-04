@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Covid19.Stats.Data.AppDbContext">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\AppDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Covid19.Stats.Data.CovidStat">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAEAACAAAgAAAAAgAYAAAABAEAApIAAwAAAAAEA=</HashCode>
+      <FileName>Data\CovidStat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Covid19.CountrySummaryCollectionExtension">
+    <Position X="0.5" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAgAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Models\Extensions\CountrySummaryCollectionExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Covid19.DataPointsCollectionExtension">
+    <Position X="0.5" Y="7" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Extensions\DataPointsCollectionExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Covid19.Stats.Models.CountrySummaryViewModel">
+    <Position X="7.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAEEAAAAIBAAAAAAAAAAAAUAAIAAAAgAAAAAAAAABA=</HashCode>
+      <FileName>Models\CountrySummaryViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="DataPoints" />
+      <Field Name="DataPointsMonthly" />
+      <Field Name="DataPointsWeekly" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Covid19.Stats.Models.GlobalCountrySummaryViewModel">
+    <Position X="10" Y="6.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAIAAAAAAAAAAAAAEAAIAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GlobalCountrySummaryViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Covid19.Stats.Models.GlobalSummaryViewModel">
+    <Position X="7.25" Y="3.75" Width="2.25" />
+    <AssociationLine Name="DataPointsMonthly" Type="Covid19.Stats.Models.DataPoint">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.091" Y="0.335" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="DataPointsWeekly" Type="Covid19.Stats.Models.DataPoint">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.28" Y="0.12" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="DataPoints" Type="Covid19.Stats.Models.DataPoint">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.79" Y="0.629" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAEEAIAAIBAAAAAAAAAAAAUAAAAAAAgIAAAAAAAABA=</HashCode>
+      <FileName>Models\GlobalSummaryViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="DataPoints" />
+      <Field Name="DataPointsMonthly" />
+      <Field Name="DataPointsWeekly" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Covid19.Stats.Pages.Сountries.IndexModel">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Pages\Сountries\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="CountrySummary" />
+      <Field Name="_service" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Covid19.Stats.Pages.IndexModel">
+    <Position X="10.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAQAAAIAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Pages\Index.cshtml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_service" />
+      <Field Name="GlobalStat" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="CountriesSummary" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Covid19.Stats.Services.CountryStatService">
+    <Position X="13" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CountryStatService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Covid19.Stats.Services.BaseStatService">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <AssociationLine Name="_context" Type="Covid19.Stats.Data.AppDbContext">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.056" Y="0.095" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\BaseStatService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Covid19.Stats.Services.GlobalStatService">
+    <Position X="13.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAACAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Services\GlobalStatService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_dataPointsSelector" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Covid19.Stats.Services.DataPointsSelector">
+    <Position X="16" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABCAAAAAAAAAAAAAAAAAAAgAAAAAAAAg=</HashCode>
+      <FileName>Services\DataPointsSelector.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Struct Name="Covid19.Stats.Models.DataPoint">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAIAAAAAAAAAAAAAEAAAAAAAhAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DataPoint.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

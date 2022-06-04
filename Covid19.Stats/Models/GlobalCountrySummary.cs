@@ -6,7 +6,7 @@ using Covid19.Stats.Data;
 
 namespace Covid19.Stats.Models
 {
-    public class GlobalCountrySummaryViewModel
+    public class GlobalCountrySummary
     {
         public string Country { get; set; }
         public int Cases { get; set; }

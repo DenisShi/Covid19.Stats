@@ -35,7 +35,7 @@ namespace Covid19.Stats.Services
                 DataPointsWeekly = _dataPointsSelector.GetWeekly()
             };   
         }
-        public IEnumerable<GlobalCountrySummaryViewModel> GetCountriesStat()
+        public IEnumerable<GlobalCountrySummary> GetCountriesStat()
         {
             #region PrepareData
             var lastData = getLastData()
@@ -62,7 +62,7 @@ namespace Covid19.Stats.Services
             var joinedData = lastData.Join(penultData,
                     f => f.Country,
                     s => s.Country,
-                    (f, s) => new GlobalCountrySummaryViewModel
+                    (f, s) => new GlobalCountrySummary
                     {
                         Country = f.Country,
                         Cases = f.Cases,
