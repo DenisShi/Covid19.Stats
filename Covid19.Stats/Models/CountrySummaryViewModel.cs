@@ -17,5 +17,6 @@ namespace Covid19.Stats.Models
         public IEnumerable<DataPoint> DataPoints;
         public IEnumerable<DataPoint> DataPointsWeekly;
         public IEnumerable<DataPoint> DataPointsMonthly;
+        public IEnumerable<RegionSummary> RegionSummaries;
     }
 }

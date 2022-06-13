@@ -13,5 +13,13 @@ namespace Covid19.Stats.Models
         public int Deaths { get; set; }
         public int CasesDelta { get; set; }
         public int DeathsDelta { get; set; }
+
+        public int FatalityRatio
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

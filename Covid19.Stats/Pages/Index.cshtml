@@ -57,7 +57,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var countryStat in Model.CountriesSummary)
+            @foreach (var countryStat in Model.GlobalStat.CountriesSummary)
             {
                 <tr>
                     <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@countryStat.Country">@countryStat.Country</a></td>
@@ -129,7 +129,7 @@
 
     BuildGeoChart(
         ['Country', 'Cases'],
-        @Json.Serialize(Model.CountriesSummary.GetCasesMapInfo()),
+        @Json.Serialize(Model.GlobalStat.CountriesSummary.GetCasesMapInfo()),
         'cases_map'
     )
 </script>

@@ -39,7 +39,15 @@ namespace Covid19.Stats.Models
             }
         }
 
-        public int RegionName
+        public string RegionName
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public int FatalityRatio
         {
             get => default;
             set
