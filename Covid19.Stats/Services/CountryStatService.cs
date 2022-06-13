@@ -39,5 +39,10 @@ namespace Covid19.Stats.Services
                 DataPointsWeekly = _dataPointsSelector.GetWeekly(country)
             };
         }
+
+        public void GetRegionsStat()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

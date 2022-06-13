@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Covid19.Stats.Models;
+
 namespace Covid19
 {
     public static class CountrySummaryCollectionExtension
@@ -16,7 +17,6 @@ namespace Covid19
             }
             return pairs;
         }
-
         public static Dictionary<string, int> GetDeathsMapInfo(this IEnumerable<GlobalCountrySummary> countrySummaries)
         {
             Dictionary<string, int> pairs = new();
@@ -27,11 +27,12 @@ namespace Covid19
             return pairs;
         }
 
-        public static List<(string, int, int)> GetMapInfo(this IEnumerable<GlobalCountrySummary> countrySummaries)
+
+        public static Dictionary<string, (int, int)> GetGlobalMapInfo(this IEnumerable<GlobalCountrySummary> countrySummaries)
         {
-            var ps = new List<(string, int, int)>();
+            Dictionary<string, (int, int)> ps = new();
             foreach (var cs in countrySummaries)
-                ps.Add((cs.Country, cs.Cases, cs.Deaths));
+                ps.Add(cs.Country, (cs.Cases, cs.Deaths));
 
             return ps;
         }

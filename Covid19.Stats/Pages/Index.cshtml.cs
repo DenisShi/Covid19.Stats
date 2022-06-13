@@ -24,7 +24,6 @@ namespace Covid19.Stats.Pages
         public void OnGet()
         {
             GlobalStat = _service.GetGlobalStat();
-            GlobalStat.InitParams();
             CountriesSummary = _service.GetCountriesStat();
         }
     }

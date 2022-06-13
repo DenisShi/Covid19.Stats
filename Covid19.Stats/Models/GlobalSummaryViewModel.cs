@@ -18,14 +18,5 @@ namespace Covid19.Stats.Models
         public IEnumerable<DataPoint> DataPoints;
         public IEnumerable<DataPoint> DataPointsMonthly;
         public IEnumerable<DataPoint> DataPointsWeekly;
-        public GlobalScriptsParams Params { get; set; }
-        public void InitParams()
-        {
-            Params = new();
-            Params.BarChartCases = $"{JsonSerializer.Serialize(DataPoints.GetDates())}, " +
-                $"{JsonSerializer.Serialize(DataPoints.GetCases())}, " +
-                $"'casesChart'," +
-                $"\"Cases Chart\"";
-        }
     }
 }
