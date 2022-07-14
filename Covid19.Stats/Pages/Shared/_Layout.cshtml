@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Covid19.Stats</title>
     <partial name="_Styles" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="~/js/barChart.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <partial name="_Scripts" />
+
 </head>
 <body>
     <header>
@@ -34,8 +33,8 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container-fluid">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
@@ -45,7 +44,6 @@
             &copy; 2022 - Covid19.Stats - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
-    <partial name="_Scripts" />
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

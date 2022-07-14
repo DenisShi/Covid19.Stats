@@ -1,140 +1,39 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "COVID-19 Global statistics"; }
+    ViewData["Title"] = "COVID-19 Global statistic"; }
 
-
-<script src="~/js/geoChart.js"></script>
-
-<h1>@Model.GlobalStat.DataPointsMonthly.FirstOrDefault().Cases</h1>
-
-
-<!-- #region Total -->
-
-<div class="text-center">
-    <h1 class="display-5">Total Coronavirus Cases: @Model.GlobalStat.Cases + @Model.GlobalStat.CasesDelta</h1>
-    <h1 class="display-5">Total Deaths: @Model.GlobalStat.Deaths + @Model.GlobalStat.DeathsDelta</h1>
-    <p class="text-muted">Last Update: @Model.GlobalStat.LastUpdate</p>
+<div class="row mr-1">
+    <div class="col-5">
+        <partial name="_Table" model="Model.GlobalStat.TableData" />
+    </div>
+    <div class="col-7">
+        <partial name="_Map" />
+        <partial name="_Charts" />
+    </div>
 </div>
 
-<!-- #endregion -->
-<!-- #region toggle Cases/Deaths -->
-<p>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseCases multiCollapseDeaths">Cases/Deaths</button>
-</p>
+<partial name="_ChartsInit" model="Model.GlobalStat.DataPoints" />
+<partial name="_MapInit" model="Model.GlobalStat" />
 
-<!-- #region Cases -->
+@section Scripts{
+    <script>
+        var TimeInterval = 'Monthly';
+        var Type = 'Cases';
+        function ChangeChartType(type) {
+            var ActiveChart = document.getElementById("chart" + Type + TimeInterval);
+            ActiveChart.style.display = 'none';
+            Type = type;
+            ActiveChart = document.getElementById("chart" + Type + TimeInterval);
+            ActiveChart.style.display = 'block';
+        }
+        function ChangeChartInterval(interval) {
+            var ActiveChart = document.getElementById("chart" + Type + TimeInterval);
+            ActiveChart.style.display = 'none';
+            TimeInterval = interval;
+            ActiveChart = document.getElementById("chart" + Type + TimeInterval);
+            ActiveChart.style.display = 'block';
+        }
+    </script>
 
-<div class="collapse multi-collapse show" id="multiCollapseCases">
-    <div id="cases_map" class="d-flex justify-content-center"></div>
-    <div><canvas id="casesChart"></canvas></div>
-</div>
-
-<!-- #endregion -->
-<!-- #region Deaths -->
-<div class="collapse multi-collapse " id="multiCollapseDeaths">
-    <div id="deaths_map" class="d-flex justify-content-center"></div>
-    <div><canvas id="deathsChart"></canvas></div>
-</div>
-
-<!-- #endregion -->
-<!-- #region Monthly Cases -->
-<div><canvas id="casesChartMonthly"></canvas></div>
-<!-- #endregion -->
-<!-- #region Monthly Deaths -->
-<!-- #endregion -->
-<!-- #endregion -->
-<!-- #region Table -->
-
-<div class="table-responsive">
-    <input class="form-control col-3 mt-4 mb-2  " type="text" placeholder="Search" id="search-text" onkeyup="tableSearch()">
-    <table class="table table-striped recipe table-hover table_sort" id="info-table">
-        <thead>
-            <tr>
-                <th class="th-sm">Country</th>
-                <th class="th-sm">Confirmed</th>
-                <th class="th-sm">Deaths</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var countryStat in Model.GlobalStat.CountriesSummary)
-            {
-                <tr>
-                    <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@countryStat.Country">@countryStat.Country</a></td>
-                    <td class="align-middle">@countryStat.Cases + @countryStat.CasesDelta</td>
-                    <td class="align-middle">@countryStat.Deaths + @countryStat.DeathsDelta</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
-<!-- #endregion -->
-<!-- #region test Charts -->
-<div><canvas id="casesMonthlyChart"></canvas></div>
-<div><canvas id="deathsMonthlyChart"></canvas></div>
-<div><canvas id="casesWeeklyChart"></canvas></div>
-<!-- #endregion -->
-<!-- #region scripts -->
-<!-- #region Charts init -->
-
-<script>
-    let labels = @Json.Serialize(Model.GlobalStat.DataPoints.GetDates());
-    BuildBarChart(labels,
-        @Json.Serialize(Model.GlobalStat.DataPoints.GetCases()),
-        'casesChart',
-        "Cases Chart");
-    BuildBarChart(labels,
-        @Json.Serialize(Model.GlobalStat.DataPoints.GetDeaths()),
-        'deathsChart',
-        "Deaths Chart");
-
-    labels = @Json.Serialize(Model.GlobalStat.DataPointsMonthly.GetDates());
-    BuildBarChart(labels,
-        @Json.Serialize(Model.GlobalStat.DataPointsMonthly.GetCases()),
-        'casesMonthlyChart',
-        "Cases Monthly Chart");
-    BuildBarChart(labels,
-        @Json.Serialize(Model.GlobalStat.DataPointsMonthly.GetDeaths()),
-        'deathsMonthlyChart',
-        "Deaths Monthly Chart");
-
-    labels = @Json.Serialize(Model.GlobalStat.DataPointsWeekly.GetDates());
-    BuildBarChart(labels,
-        @Json.Serialize(Model.GlobalStat.DataPointsWeekly.GetDeaths()),
-        'casesWeeklyChart',
-        "cases Weekly Chart");
-
-
-
-    @* let test = @Model.GlobalStat.Params.BarChartCases;*@
-
-    @* BuildBarChart(@Model.GlobalStat.Params.BarChartCases);*@
-
-</script>
-
-<!-- #endregion -->
-<!-- #region Map Init -->
-<script>
-    @*BuildGeoChart(
-        ['Country', 'Cases'],
-        @Json.Serialize(Model.CountriesSummary.GetCasesMapInfo()),
-        'cases_map'
-    )
-     BuildGeoChart(
-        ['Country', 'Deaths'],
-        @Json.Serialize(Model.CountriesSummary.GetDeathsMapInfo()),
-        'deaths_map'
-    )*@
-
-    BuildGeoChart(
-        ['Country', 'Cases'],
-        @Json.Serialize(Model.GlobalStat.CountriesSummary.GetCasesMapInfo()),
-        'cases_map'
-    )
-</script>
-<!-- #endregion -->
-<!-- #endregion -->
-
-<script src="~/js/table.js"></script>
-
+}

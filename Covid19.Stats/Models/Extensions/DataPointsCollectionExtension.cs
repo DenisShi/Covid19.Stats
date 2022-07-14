@@ -20,5 +20,26 @@ namespace Covid19
         {
             return dataPoints.Select(x => x.Deaths);
         }
+        public static IEnumerable<int> GetCasesDelta(this IEnumerable<DataPoint> dataPoints)
+        {
+            return dataPoints.Select(x => x.CasesDelta);
+        }
+        public static IEnumerable<int> GetDeathsDelta(this IEnumerable<DataPoint> dataPoints)
+        {
+            return dataPoints.Select(x => x.DeathsDelta);
+        }
+        public static IEnumerable<DataPoint> InitDeltas(this IEnumerable<DataPoint> dataPoints)
+        {
+            var array = dataPoints.ToArray();
+            var previousDataPoint = array.First();
+
+            foreach (var datapoint in array.Skip(1))
+            {
+                datapoint.CasesDelta = datapoint.Cases - previousDataPoint.Cases;
+                datapoint.DeathsDelta = datapoint.Deaths - previousDataPoint.Deaths;
+                previousDataPoint = datapoint;
+            }
+            return array.AsEnumerable();
+        }
     }
 }

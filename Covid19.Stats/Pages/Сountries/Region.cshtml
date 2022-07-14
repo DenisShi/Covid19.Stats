@@ -1,22 +1,20 @@
-﻿@page "{country}"
-@model Covid19.Stats.Pages.Сountries.IndexModel
+﻿@page "{country}/{region}"
+@model Covid19.Stats.Pages.Сountries.RegionModel
 @{
-    ViewData["Title"] = $"{Model.CountryStat.TableData.CountryRegion} COVID-19";
 }
-
-<div class="row mr-1">
-    <div class="col-5">
-        <partial name="_Table" model="Model.CountryStat.TableData" />   
+<div class="container">
+    <div class="text-center">
+        <h2 class="display-5">Country: @Model.RegionStat.Country</h2>
+        <h2 class="display-5">Region: @Model.RegionStat.Region</h2>
+        <h2 class="display-5">Total Cases: @Model.RegionStat.Cases + @Model.RegionStat.CasesDelta</h2>
+        <h2 class="display-5">Total Deaths: @Model.RegionStat.Deaths + @Model.RegionStat.DeathsDelta</h2>
+        <p class="text-muted">Last Update: @Model.RegionStat.LastUpdate</p>
     </div>
-    <div class="col-7">
-        @*<partial name="_Map" />*@
-        <partial name="_Charts" />
-    </div>
+    <partial name="_Charts" />
 </div>
 
-<partial name="_ChartsInit" model="Model.CountryStat.DataPoints" />
-@*<partial name="_MapInit" model="Model.CountryStat" />*@
 
+<partial name="_ChartsInit" model="Model.RegionStat.DataPoints" />
 
 @section Scripts{
     <script>

@@ -1,0 +1,15 @@
+﻿@page
+@model Covid19.Stats.Pages.MapModel
+@{
+}
+<script src="~/js/geoChart.js"></script>
+
+<div id="stats_map" class="d-flex justify-content-center"></div>
+
+
+<script>
+    BuildGeoChart(
+        @Html.Raw(Model.GlobalStat.JsonMapDataTable),
+        'stats_map'
+    )
+</script>

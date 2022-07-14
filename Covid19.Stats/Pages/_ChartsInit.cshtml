@@ -1,0 +1,108 @@
+﻿@model Covid19.Stats.Models.DataPointsAggregation
+
+<script>
+    let labels = @Json.Serialize(Model.DataPointsMonthly.GetDates());
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsMonthly.GetCases()),
+        'chartCasesMonthly',
+        "Cases Monthly Chart");
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsMonthly.GetDeaths()),
+        'chartDeathsMonthly',
+        "Deaths Monthly Chart");
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsMonthly.GetCasesDelta()),
+        'chartCasesDeltaMonthly',
+        "New Cases Monthly Chart");
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsMonthly.GetDeathsDelta()),
+        'chartDeathsDeltaMonthly',
+        "New Deaths Monthly Chart",
+        );
+    BuildCombinedLineChart(
+        labels,
+        @Json.Serialize(Model.DataPointsMonthly.GetCases()),
+        @Json.Serialize(Model.DataPointsMonthly.GetDeaths()),
+        'chartCombinedMonthly',
+        'Cases',
+        'Deaths'
+        )
+    @*BuildBarChart(labels,
+        @Json.Serialize(Model.DataPointsMonthly.GetCases()),
+        'chartActiveMonthly',
+        "Active Monthly Chart");*@
+
+    labels = @Json.Serialize(Model.DataPointsWeekly.GetDates());
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsWeekly.GetCases()),
+        'chartCasesWeekly',
+        "Cases Weekly Chart");
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsWeekly.GetDeaths()),
+        'chartDeathsWeekly',
+        "Deaths Weekly Chart");
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsWeekly.GetDeathsDelta()),
+        'chartDeathsDeltaWeekly',
+        "New Deaths Weekly Chart");
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsWeekly.GetCasesDelta()),
+        'chartCasesDeltaWeekly',
+        "New Cases Weekly Chart");
+     BuildCombinedLineChart(
+        labels,
+        @Json.Serialize(Model.DataPointsWeekly.GetCases()),
+        @Json.Serialize(Model.DataPointsWeekly.GetDeaths()),
+        'chartCombinedWeekly',
+        'Cases',
+        'Deaths'
+        )
+     @*BuildBarChart(labels,
+        @Json.Serialize(Model.DataPointsWeekly.GetActive()),
+        'chartActiveWeekly',
+        "Active Weekly Chart");*@
+
+
+    labels = @Json.Serialize(Model.DataPointsDaily.GetDates());
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsDaily.GetCases()),
+        'chartCasesDaily',
+        "Cases Daily Chart");
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsDaily.GetDeaths()),
+        'chartDeathsDaily',
+        "Deaths Daily Chart");
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsDaily.GetCasesDelta()),
+        'chartCasesDeltaDaily',
+        "New Cases Daily Chart");
+    BuildBarChart(
+        labels,
+        @Json.Serialize(Model.DataPointsDaily.GetDeathsDelta()),
+        'chartDeathsDeltaDaily',
+        "New Deaths Daily Chart");
+    BuildCombinedLineChart(
+        labels,
+        @Json.Serialize(Model.DataPointsDaily.GetCases()),
+        @Json.Serialize(Model.DataPointsDaily.GetDeaths()),
+        'chartCombinedDaily',
+        'Cases',
+        'Deaths'
+        )
+    @*BuildBarChart(labels,
+        @Json.Serialize(Model.DataPointsDaily.GetActive()),
+        'chartActiveDaily',
+        "Active Daily Chart");*@
+</script>
+

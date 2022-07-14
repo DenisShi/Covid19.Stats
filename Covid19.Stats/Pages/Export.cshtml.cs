@@ -15,13 +15,14 @@ namespace Covid19.Stats.Pages
         {
             _service = service;
         }
-        public void OnGet()
-        {
-        }
-        public void OnPost(string separator, string[] countries)
-        {
-            _service.GetData(separator, countries);
-           
-        }
+        //public ActionResult OnGet()
+        //{
+
+        //}
+        //public ActionResult OnPost(string separator, string[] countries)
+        //{
+        //    _service.GetData(separator, countries);
+        //    return FileResult
+        //}
     }
 }

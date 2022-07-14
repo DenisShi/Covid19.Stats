@@ -1,0 +1,7 @@
+﻿@model Covid19.Stats.Models.SummaryViewModel
+<script>
+    BuildGeoChart(
+        @Html.Raw(Model.JsonMapDataTable),
+        'stats_map'
+    )
+</script>

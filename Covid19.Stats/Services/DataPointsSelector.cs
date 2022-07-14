@@ -15,26 +15,32 @@ namespace Covid19.Stats.Services
             _context = context;
         }
 
-        public IEnumerable<DataPoint> GetAll(string country = null)
+        public IEnumerable<DataPoint> GetAll(string country = null, string region = null)
         {
-            var stats = country == null ? _context.Stats : _context.Stats.Where(x => x.Country_Region == country);
+            var stats = country == null && region == null ?
+                _context.Stats :
+                region == null ? _context.Stats.Where(x => x.Country_Region == country) :
+                 _context.Stats.Where(x => x.Country_Region == country && x.Province_State == region);
 
             return stats
                 .GroupBy(
                 x => x.Date,
-                x => new { x.Confirmed, x.Death })
+                x => x)
                 .Select(x => new DataPoint
                 {
                     Date = x.Key,
                     Cases = x.Sum(y => y.Confirmed),
                     Deaths = x.Sum(y => y.Death),
                 }
-                ).OrderBy(x => x.Cases);
+                ).OrderBy(x => x.Cases).InitDeltas();
         }
 
-        public IEnumerable<DataPoint> GetMonthly(string country = null)
+        public IEnumerable<DataPoint> GetMonthly(string country = null, string region = null)
         {
-            var stats = country == null ? _context.Stats : _context.Stats.Where(x => x.Country_Region == country);
+            var stats = country == null && region == null ?
+                _context.Stats :
+                region == null ? _context.Stats.Where(x => x.Country_Region == country) :
+                 _context.Stats.Where(x => x.Country_Region == country && x.Province_State == region);
 
             return stats
                 .Where(x => x.Date.Day == 1)
@@ -43,7 +49,7 @@ namespace Covid19.Stats.Services
                     x.Date.Year,
                     x.Date.Date.Month,
                     x.Confirmed,
-                    x.Death
+                    x.Death,
                 }
                 )
                 .GroupBy(
@@ -52,36 +58,31 @@ namespace Covid19.Stats.Services
                 {
                     Date = new DateTime(key.Year, key.Month, 1),
                     Cases = group.Sum(y => y.Confirmed),
-                    Deaths = group.Sum(y => y.Death)
+                    Deaths = group.Sum(y => y.Death),
                 }
-                ).AsEnumerable().OrderBy(x => x.Cases);
+                ).AsEnumerable().OrderBy(x => x.Cases).InitDeltas();
         }
 
-        public IEnumerable<DataPoint> GetWeekly(string country = null)
+        public IEnumerable<DataPoint> GetWeekly(string country = null, string region = null)
         {
-            var stats = country == null ? _context.Stats : _context.Stats.Where(x => x.Country_Region == country);
-            DateTime firstDay = new(2020, 05, 30);
+            var stats = country == null && region == null ? 
+                _context.Stats : 
+                region == null ? _context.Stats.Where(x => x.Country_Region == country) :
+                 _context.Stats.Where(x => x.Country_Region == country && x.Province_State == region);
 
 
             return stats
-                .Select(x => new
-                {
-                    x.Date,
-                    x.Confirmed,
-                    x.Death
-                }
-                ).AsEnumerable()
+                .Where(x => x.Date.DayOfWeek == DayOfWeek.Monday)
                 .GroupBy(
-                x => new { WeekNumber = (x.Date - firstDay) / 7 },
-                (key, group) => new DataPoint
+                x => x.Date,
+                x => x)
+                .Select(x => new DataPoint
                 {
-                    Date = new DateTime(2000, 10, 10),
-                    Cases = group.Sum(y => y.Confirmed),
-                    Deaths = group.Sum(y => y.Death)
+                    Date = x.Key,
+                    Cases = x.Sum(y => y.Confirmed),
+                    Deaths = x.Sum(y => y.Death),
                 }
-                ).AsEnumerable().OrderBy(x => x.Cases);
+                ).OrderBy(x => x.Cases).InitDeltas();
         }
-
-
     }
 }

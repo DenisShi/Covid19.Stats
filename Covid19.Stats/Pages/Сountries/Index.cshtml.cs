@@ -12,19 +12,15 @@ namespace Covid19.Stats.Pages.Сountries
     public class IndexModel : PageModel
     {
         CountryStatService _service;
-        public CountrySummaryViewModel CountrySummary;
+        public SummaryViewModel CountryStat;
         public IndexModel(CountryStatService service)
         {
             _service = service;
         }
         public IActionResult OnGet(string country)
         {
-            CountrySummary = _service.GetCountryStat(country);
-            if (CountrySummary is null)
-            {
-                return NotFound();
-            }
-            return Page();
+            CountryStat = _service.GetCountryStat(country);
+            return CountryStat is null ? NotFound() : Page();
         }
     }
 }

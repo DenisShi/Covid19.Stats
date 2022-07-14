@@ -6,20 +6,13 @@ using Covid19.Stats.Data;
 
 namespace Covid19.Stats.Models
 {
-    public class GlobalCountrySummary
+    public class TableRowSummary
     {
-        public string Country { get; set; }
+        public string CountryRegion { get; set; }
         public int Cases { get; set; }
         public int Deaths { get; set; }
         public int CasesDelta { get; set; }
         public int DeathsDelta { get; set; }
-
-        public int FatalityRatio
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public float FatalityRatio { get; set; }
     }
 }

@@ -5,12 +5,8 @@ namespace Covid19.Stats.Data
     public class CovidStat
     {
         public int Id { get; set; }
-        public string FIPS { get; set; }
-        public string Admin2 { get; set; }
         public string Province_State { get; set; }
         public string Country_Region { get; set; }
-        public int Date_Seconds { get; set; }
-        public int Last_Update_Seconds { get; set; }
         public float Lat { get; set; }
         public float Long { get; set; }
         public int Confirmed { get; set; }

@@ -1,0 +1,55 @@
+﻿@model TableData
+
+
+
+    <div class="row">
+        <input class="col-4 form-control ml-3" type="text" placeholder="Search" id="search-text" onkeyup="tableSearch()">
+        <p class="col text-right mt-2"><span class="text-muted">Last Update: @Model.LastUpdate</span></p>
+    </div>
+    <div class="table-responsive" style="overflow-y: scroll; max-height: 130vh;">
+        <table class="table table-striped recipe table-hover table_sort table-bordered" id="info-table">
+            <thead>
+                <tr class="bg-secondary text-white table_sort">
+                    <th class="th-sm">Country</th>
+                    <th class="th-sm">Confirmed</th>
+                    <th class="th-sm">Deaths</th>
+                    <th class="th-sm">Case fatality ratio</th>
+                </tr>
+                <tr>
+                    <td class="align-middle"><b>@Model.CountryRegion</b></td>
+                    <td class="align-middle"><b>@Model.Cases + @Model.CasesDelta</b></td>
+                    <td class="align-middle"><b>@Model.Deaths + @Model.DeathsDelta</b></td>
+                    <td class="align-middle"><b>@Model.FatalityRatio %</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.IsGlobalTable)
+                {
+                    @foreach (var row in Model.RowSummary)
+                    {
+                        <tr>
+                            <td class="align-middle"><a asp-page="Сountries/Index" asp-route-country="@row.CountryRegion">@row.CountryRegion</a></td>
+                            <td class="align-middle">@row.Cases + @row.CasesDelta</td>
+                            <td class="align-middle">@row.Deaths + @row.DeathsDelta</td>
+                            <td class="align-middle">@row.FatalityRatio %</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    @foreach (var row in Model.RowSummary)
+                    {
+                        <tr>
+                            <td class="align-middle"><a asp-page="Region" asp-route-region="@row.CountryRegion" asp-route-country="@Model.CountryRegion">@row.CountryRegion</a></td>
+                            <td class="align-middle">@row.Cases + @row.CasesDelta</td>
+                            <td class="align-middle">@row.Deaths + @row.DeathsDelta</td>
+                            <td class="align-middle">@row.FatalityRatio %</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+
