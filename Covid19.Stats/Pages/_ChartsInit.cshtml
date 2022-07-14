@@ -106,3 +106,23 @@
         "Active Daily Chart");*@
 </script>
 
+<script>
+    var TimeInterval = 'Monthly';
+    var Type = 'Cases';
+    function ChangeChartType(type) {
+        var ActiveChart = document.getElementById("chart" + Type + TimeInterval);
+        ActiveChart.style.display = 'none';
+        Type = type;
+        ActiveChart = document.getElementById("chart" + Type + TimeInterval);
+        ActiveChart.style.display = 'block';
+    }
+    function ChangeChartInterval(interval) {
+        var ActiveChart = document.getElementById("chart" + Type + TimeInterval);
+        ActiveChart.style.display = 'none';
+        TimeInterval = interval;
+        ActiveChart = document.getElementById("chart" + Type + TimeInterval);
+        ActiveChart.style.display = 'block';
+    }
+</script>
+
+

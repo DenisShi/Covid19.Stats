@@ -1,47 +1,49 @@
 ﻿
-<div><div class="row mt-2 mb-2 d-flex">
-    <div class="dropdown justify-content-start">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Chart type
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <button class="dropdown-item" onclick="ChangeChartType('Cases')">Cases total</button>
-            <button class="dropdown-item" onclick="ChangeChartType('Deaths')">Deaths total</button>
-            <button class="dropdown-item" onclick="ChangeChartType('CasesDelta')">New cases</button>
-            <button class="dropdown-item" onclick="ChangeChartType('DeathsDelta')">New deaths</button>
-            <button class="dropdown-item" onclick="ChangeChartType('Combined')">Combined cases/deaths</button>
-            @*<button class="dropdown-item" onclick="ChangeChartType('Active')">Active total chart</button>*@
+<div>
+    <div class="row mt-2 mb-2 d-flex">
+        <div class="dropdown justify-content-start">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Chart type
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" onclick="ChangeChartType('Cases')">Cases total</button>
+                <button class="dropdown-item" onclick="ChangeChartType('Deaths')">Deaths total</button>
+                <button class="dropdown-item" onclick="ChangeChartType('CasesDelta')">New cases</button>
+                <button class="dropdown-item" onclick="ChangeChartType('DeathsDelta')">New deaths</button>
+                <button class="dropdown-item" onclick="ChangeChartType('Combined')">Combined cases/deaths</button>
+                @*<button class="dropdown-item" onclick="ChangeChartType('Active')">Active total chart</button>*@
+            </div>
+        </div>
+        <div class="btn-group btn-group-toggle justify-content-end float-right ml-auto" data-toggle="buttons">
+            <label class="btn btn-secondary" onclick="ChangeChartInterval('Daily')">
+                <input type="radio" name="options" id="daily" autocomplete="off"> Daily
+            </label>
+            <label class="btn btn-secondary" onclick="ChangeChartInterval('Weekly')">
+                <input type="radio" name="options" id="weekly" autocomplete="off"> Weekly
+            </label>
+            <label class="btn btn-secondary active" onclick="ChangeChartInterval('Monthly')">
+                <input type="radio" name="options" id="monthly" autocomplete="off" checked> Monthly
+            </label>
         </div>
     </div>
-    <div class="btn-group btn-group-toggle justify-content-end float-right ml-auto" data-toggle="buttons">
-        <label class="btn btn-secondary" onclick="ChangeChartInterval('Daily')">
-            <input type="radio" name="options" id="daily" autocomplete="off"> Daily
-        </label>
-        <label class="btn btn-secondary" onclick="ChangeChartInterval('Weekly')">
-            <input type="radio" name="options" id="weekly" autocomplete="off"> Weekly
-        </label>
-        <label class="btn btn-secondary active" onclick="ChangeChartInterval('Monthly')">
-            <input type="radio" name="options" id="monthly" autocomplete="off" checked> Monthly
-        </label>
-    </div>
+    <div><canvas id="chartCasesDaily" style="display:none"></canvas></div>
+    <div><canvas id="chartDeathsDaily" style="display:none"></canvas></div>
+    <div><canvas id="chartCasesDeltaDaily" style="display:none"></canvas></div>
+    <div><canvas id="chartDeathsDeltaDaily" style="display:none"></canvas></div>
+    <div><canvas id="chartCombinedDaily" style="display:none"></canvas></div>
+    @*<div><canvas id="chartActiveDaily" style="display:none"></canvas></div>*@
+
+    <div><canvas id="chartCasesWeekly" style="display:none"></canvas></div>
+    <div><canvas id="chartDeathsWeekly" style="display:none"></canvas></div>
+    <div><canvas id="chartCasesDeltaWeekly" style="display:none"></canvas></div>
+    <div><canvas id="chartDeathsDeltaWeekly" style="display:none"></canvas></div>
+    <div><canvas id="chartCombinedWeekly" style="display:none"></canvas></div>
+    @*<div><canvas id="chartActiveWeekly" style="display:none"></canvas></div>*@
+
+    <div><canvas id="chartCasesMonthly" style="display:block"></canvas></div>
+    <div><canvas id="chartDeathsMonthly" style="display:none"></canvas></div>
+    <div><canvas id="chartCasesDeltaMonthly" style="display:none"></canvas></div>
+    <div><canvas id="chartDeathsDeltaMonthly" style="display:none"></canvas></div>
+    <div><canvas id="chartCombinedMonthly" style="display:none"></canvas></div>
+    @*<div><canvas id="chartActiveMonthly" style="display:none"></canvas></div>*@
 </div>
-<div><canvas id="chartCasesDaily" style="display:none"></canvas></div>
-<div><canvas id="chartDeathsDaily" style="display:none"></canvas></div>
-<div><canvas id="chartCasesDeltaDaily" style="display:none"></canvas></div>
-<div><canvas id="chartDeathsDeltaDaily" style="display:none"></canvas></div>
-<div><canvas id="chartCombinedDaily" style="display:none"></canvas></div>
-@*<div><canvas id="chartActiveDaily" style="display:none"></canvas></div>*@
-
-<div><canvas id="chartCasesWeekly" style="display:none"></canvas></div>
-<div><canvas id="chartDeathsWeekly" style="display:none"></canvas></div>
-<div><canvas id="chartCasesDeltaWeekly" style="display:none"></canvas></div>
-<div><canvas id="chartDeathsDeltaWeekly" style="display:none"></canvas></div>
-<div><canvas id="chartCombinedWeekly" style="display:none"></canvas></div>
-@*<div><canvas id="chartActiveWeekly" style="display:none"></canvas></div>*@
-
-<div><canvas id="chartCasesMonthly" style="display:block"></canvas></div>
-<div><canvas id="chartDeathsMonthly" style="display:none"></canvas></div>
-<div><canvas id="chartCasesDeltaMonthly" style="display:none"></canvas></div>
-<div><canvas id="chartDeathsDeltaMonthly" style="display:none"></canvas></div>
-<div><canvas id="chartCombinedMonthly" style="display:none"></canvas></div>
-@*<div><canvas id="chartActiveMonthly" style="display:none"></canvas></div>*@</div>
