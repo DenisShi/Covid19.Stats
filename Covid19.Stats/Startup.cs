@@ -29,6 +29,7 @@ namespace Covid19.Stats
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddRazorPages();
+            services.AddMemoryCache();
 
             services.AddScoped<GlobalStatService>();
             services.AddScoped<CountryStatService>();

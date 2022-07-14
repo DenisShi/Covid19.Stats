@@ -15,6 +15,6 @@ namespace Covid19.Stats.Models
         public int DeathsDelta { get; set; }
         public float FatalityRatio { get; set; }
         public DateTime LastUpdate { get; set; }
-        public IEnumerable<TableRowSummary> RowSummary;
+        public TableRowSummary[] RowSummary;
     }
 }

@@ -11,11 +11,8 @@ namespace Covid19.Stats.Models
     public class SummaryViewModel
     {
         public DataPointsAggregation DataPoints = new();
-        public IEnumerable<DataPoint> DataPointsDaily;
-        public IEnumerable<DataPoint> DataPointsMonthly;
-        public IEnumerable<DataPoint> DataPointsWeekly;
   
-        public TableData TableData;
+        public TableData TableData = new();
 
         string _jsonMapDataTable;
         public string JsonMapDataTable

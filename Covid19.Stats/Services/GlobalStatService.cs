@@ -5,31 +5,39 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Covid19.Stats.Data;
 using Covid19.Stats.Models;
-
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Covid19.Stats.Services
 {
     public class GlobalStatService : BaseStatService
     {
         private DataPointsSelector _dataPointsSelector;
-        public GlobalStatService(AppDbContext context, DataPointsSelector dataPointsSelector) : base(context) 
+        public GlobalStatService(AppDbContext context, DataPointsSelector dataPointsSelector, IMemoryCache memoryCache) : base(context, memoryCache) 
         {
             _dataPointsSelector = dataPointsSelector;
         }
 
         public SummaryViewModel GetGlobalStat()
        {
-            return new() {
-                TableData = GetTableData(),
-                DataPoints = new()
+            SummaryViewModel vm = null;
+            if (!cache.TryGetValue("globalstat", out vm))
+            {
+                vm = new()
                 {
-                    DataPointsDaily = _dataPointsSelector.GetAll(),
-                    DataPointsMonthly = _dataPointsSelector.GetMonthly(),
-                    DataPointsWeekly = _dataPointsSelector.GetWeekly()
-                }
-            };   
+                    TableData = GetTableData(),
+                    DataPoints = new()
+                    {
+                        DataPointsDaily = _dataPointsSelector.GetAll(),
+                        DataPointsMonthly = _dataPointsSelector.GetMonthly(),
+                        DataPointsWeekly = _dataPointsSelector.GetWeekly()
+                    }
+                };
+                if (vm != null)
+                    cache.Set("globalstat", vm, cacheDuration);
+            }
+            return vm;
         }
-        private IEnumerable<TableRowSummary> _getCountriesStat()
+        private TableRowSummary[] _getCountriesStat()
         {
             #region PrepareData
             var lastData = getLastData()
@@ -68,7 +76,7 @@ namespace Covid19.Stats.Services
                     }
                     ).OrderByDescending(x => x.Cases);
 
-            return joinedData;
+            return joinedData.ToArray();
         }
 
         public TableData GetTableData()
@@ -96,7 +104,7 @@ namespace Covid19.Stats.Services
             return await Task.Run(() => GetTableData());
         }
 
-        public IEnumerable<TableRowSummary> GetCountriesWithoutDelta()
+        public TableRowSummary[] GetCountriesWithoutDelta()
         {
             var lastData = getLastData()
                       .GroupBy(
@@ -108,7 +116,7 @@ namespace Covid19.Stats.Services
                           Cases = x.Sum(y => y.Confirmed),
                           Deaths = x.Sum(y => y.Death),
                       });
-            return lastData.AsEnumerable();
+            return lastData.AsEnumerable().ToArray();
         }
 
     }

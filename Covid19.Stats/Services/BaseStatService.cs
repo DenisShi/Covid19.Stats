@@ -5,27 +5,31 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Covid19.Stats.Data;
 using Covid19.Stats.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Covid19.Stats.Services
 {
     public class BaseStatService
     {
-        protected readonly AppDbContext _context;
-        public BaseStatService(AppDbContext context)
+        protected readonly AppDbContext context;
+        protected IMemoryCache cache;
+        protected readonly TimeSpan cacheDuration = TimeSpan.FromDays(1);
+        public BaseStatService(AppDbContext context, IMemoryCache memoryCache)
         {
-            _context = context;
+            this.context = context;
+            cache = memoryCache;
         }
 
         protected IQueryable<CovidStat> getLastData()
         {
-            return _context.Stats
-                .Where(s => s.Date == _context.Stats.Max(x => x.Date));
+            return context.Stats
+                .Where(s => s.Date == context.Stats.Max(x => x.Date));
         }
 
         protected IQueryable<CovidStat> getPenultData()
         {
-            return _context.Stats
-                .Where(s => s.Date == _context.Stats.Max(x => x.Date).AddDays(-1));
+            return context.Stats
+                .Where(s => s.Date == context.Stats.Max(x => x.Date).AddDays(-1));
         }
     }
 }

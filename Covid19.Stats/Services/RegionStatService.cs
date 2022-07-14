@@ -5,18 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Covid19.Stats.Data;
 using Covid19.Stats.Models;
+using Microsoft.Extensions.Caching.Memory;
+
 namespace Covid19.Stats.Services
 {
     public class RegionStatService : BaseStatService
     {
         DataPointsSelector _dataPointsSelector;
-        public RegionStatService(AppDbContext context, DataPointsSelector dataPointsSelector) : base(context)
+        public RegionStatService(AppDbContext context, DataPointsSelector dataPointsSelector, IMemoryCache memoryCache) : base(context, memoryCache)
         {
             _dataPointsSelector = dataPointsSelector;
         }
-        public RegionViewModel GetCountryStat(string country, string region)
+        public RegionViewModel GetRegionStat(string country, string region)
         {
-            var lastData = getLastData()
+                var lastData = getLastData()
               .Where(x => x.Country_Region == country && x.Province_State == region);
             var penultData = getPenultData()
                 .Where(x => x.Country_Region == country && x.Province_State == region);

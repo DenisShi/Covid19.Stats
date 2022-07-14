@@ -20,7 +20,7 @@ namespace Covid19.Stats.Pages.Сountries
 
         public IActionResult OnGet(string country, string region)
         {
-            RegionStat = _service.GetCountryStat(country, region);
+            RegionStat = _service.GetRegionStat(country, region);
             return RegionStat is null ? NotFound() : Page();
         }
     }

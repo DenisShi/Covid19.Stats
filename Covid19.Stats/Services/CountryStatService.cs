@@ -5,32 +5,39 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Covid19.Stats.Data;
 using Covid19.Stats.Models;
-
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Covid19.Stats.Services
 {
     public class CountryStatService : BaseStatService
     {
         DataPointsSelector _dataPointsSelector;
-        public CountryStatService(AppDbContext context, DataPointsSelector dataPointsSelector) : base(context) 
+        public CountryStatService(AppDbContext context, DataPointsSelector dataPointsSelector, IMemoryCache memoryCache) : base(context, memoryCache)
         {
             _dataPointsSelector = dataPointsSelector;
         }
         public SummaryViewModel GetCountryStat(string country)
         {
-            return new()
+            SummaryViewModel vm = null;
+            if (!cache.TryGetValue($"{country}stat", out vm))
             {
-                TableData = GetTableData(country),
-                DataPoints = new()
+                vm =  new()
                 {
-                    DataPointsDaily = _dataPointsSelector.GetAll(country),
-                    DataPointsMonthly = _dataPointsSelector.GetMonthly(country),
-                    DataPointsWeekly = _dataPointsSelector.GetWeekly(country)
-                }
-            };
+                    TableData = GetTableData(country),
+                    DataPoints = new()
+                    {
+                        DataPointsDaily = _dataPointsSelector.GetAll(country),
+                        DataPointsMonthly = _dataPointsSelector.GetMonthly(country),
+                        DataPointsWeekly = _dataPointsSelector.GetWeekly(country)
+                    }
+                };
+                if (vm != null)
+                    cache.Set($"{country}stat", vm, cacheDuration);
+            }
+            return vm;
         }
 
-        private IEnumerable<TableRowSummary> _getRegionsStat(string country)
+        private TableRowSummary[] _getRegionsStat(string country)
         {
             #region PrepareData
             var lastData = getLastData()
@@ -71,7 +78,7 @@ namespace Covid19.Stats.Services
                     }
                     ).OrderByDescending(x => x.Cases);
 
-            return joinedData;
+            return joinedData.ToArray();
 
         }
 
