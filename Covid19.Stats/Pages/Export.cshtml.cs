@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Covid19.Stats.Services;
+using System.IO;
 
 namespace Covid19.Stats.Pages
 {
@@ -21,7 +22,7 @@ namespace Covid19.Stats.Pages
         //}
         //public ActionResult OnPost(string separator, string[] countries)
         //{
-        //    _service.GetData(separator, countries);
+        //    var file =_service.GetData(separator, countries);
         //    return FileResult
         //}
     }
