@@ -28,6 +28,7 @@ namespace Covid19.Stats
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
+
             services.AddRazorPages();
             services.AddMemoryCache();
 

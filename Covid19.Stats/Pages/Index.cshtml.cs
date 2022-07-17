@@ -14,7 +14,6 @@ namespace Covid19.Stats.Pages
     {
         private readonly GlobalStatService _service;
         public SummaryViewModel GlobalStat;
-        
         public IndexModel(GlobalStatService service)
         {
             _service = service;
