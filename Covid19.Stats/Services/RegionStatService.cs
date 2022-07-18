@@ -18,9 +18,9 @@ namespace Covid19.Stats.Services
         }
         public RegionViewModel GetRegionStat(string country, string region)
         {
-                var lastData = getLastData()
+                var lastData = GetLastData()
               .Where(x => x.Country_Region == country && x.Province_State == region);
-            var penultData = getPenultData()
+            var penultData = GetPenultData()
                 .Where(x => x.Country_Region == country && x.Province_State == region);
             var cases = lastData.Sum(x => x.Confirmed);
             var deaths = lastData.Sum(x => x.Death);

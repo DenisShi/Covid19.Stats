@@ -37,10 +37,10 @@ namespace Covid19.Stats.Services
             return vm;
         }
 
-        private TableRowSummary[] _getRegionsStat(string country)
+        private TableRowSummary[] GetRegionsStat(string country)
         {
             #region PrepareData
-            var lastData = getLastData()
+            var lastData = GetLastData()
                     .Where(x => x.Country_Region == country)
                     .GroupBy(
                     x => x.Province_State,
@@ -52,7 +52,7 @@ namespace Covid19.Stats.Services
                         Deaths = x.Sum(y => y.Death),
                         FatalityRatio = (float)Math.Round(x.Average(y => y.Case_Fatality_Ratio), 2)
                     });
-            var penultData = getPenultData()
+            var penultData = GetPenultData()
                     .Where(x => x.Country_Region == country)
                     .GroupBy(
                     x => x.Province_State,
@@ -84,9 +84,9 @@ namespace Covid19.Stats.Services
 
         public TableData GetTableData(string country)
         {
-            var lastData = getLastData()
+            var lastData = GetLastData()
                 .Where(x => x.Country_Region == country); ;
-            var penultData = getPenultData()
+            var penultData = GetPenultData()
                 .Where(x => x.Country_Region == country); ;
             var Cases = lastData.Sum(x => x.Confirmed);
             var Deaths = lastData.Sum(x => x.Death);
@@ -99,7 +99,7 @@ namespace Covid19.Stats.Services
                 CasesDelta = Cases - penultData.Sum(x => x.Confirmed),
                 DeathsDelta = Deaths - penultData.Sum(x => x.Death),
                 FatalityRatio = (float)Math.Round(lastData.Average(x => x.Case_Fatality_Ratio), 2),
-                RowSummary = _getRegionsStat(country)
+                RowSummary = GetRegionsStat(country)
             };
             return tabledata;
         }

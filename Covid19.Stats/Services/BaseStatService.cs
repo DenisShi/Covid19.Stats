@@ -20,13 +20,13 @@ namespace Covid19.Stats.Services
             cache = memoryCache;
         }
 
-        protected IQueryable<CovidStat> getLastData()
+        protected IQueryable<CovidStat> GetLastData()
         {
             return context.Stats
                 .Where(s => s.Date == context.Stats.Max(x => x.Date));
         }
 
-        protected IQueryable<CovidStat> getPenultData()
+        protected IQueryable<CovidStat> GetPenultData()
         {
             return context.Stats
                 .Where(s => s.Date == context.Stats.Max(x => x.Date).AddDays(-1));

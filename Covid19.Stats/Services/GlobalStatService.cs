@@ -37,10 +37,10 @@ namespace Covid19.Stats.Services
             }
             return vm;
         }
-        private TableRowSummary[] _getCountriesStat()
+        private TableRowSummary[] GetCountriesStat()
         {
             #region PrepareData
-            var lastData = getLastData()
+            var lastData = GetLastData()
                     .GroupBy(
                     x => x.Country_Region,
                     x => new { x.Confirmed, x.Death, x.Case_Fatality_Ratio })
@@ -51,7 +51,7 @@ namespace Covid19.Stats.Services
                         Deaths = x.Sum(y => y.Death),
                         FatalityRatio = (float)Math.Round(x.Average(y => y.Case_Fatality_Ratio), 2)
                     });
-            var penultData = getPenultData()
+            var penultData = GetPenultData()
                     .GroupBy(
                     x => x.Country_Region,
                     x => new { x.Confirmed, x.Death })
@@ -81,10 +81,10 @@ namespace Covid19.Stats.Services
 
         public TableData GetTableData()
         {
-            var lastData = getLastData().ToList();
-            var penultData = getPenultData().ToList();
-            var Cases = getLastData().Sum(x => x.Confirmed);
-            var Deaths = getLastData().Sum(x => x.Death);
+            var lastData = GetLastData().ToList();
+            var penultData = GetPenultData().ToList();
+            var Cases = GetLastData().Sum(x => x.Confirmed);
+            var Deaths = GetLastData().Sum(x => x.Death);
             TableData tabledata = new()
             {
                 IsGlobalTable = true,
@@ -95,7 +95,7 @@ namespace Covid19.Stats.Services
                 CasesDelta = Cases - penultData.Sum(x => x.Confirmed),
                 DeathsDelta = Deaths - penultData.Sum(x => x.Death),
                 FatalityRatio = (float)Math.Round(lastData.Average(x => x.Case_Fatality_Ratio), 2),
-                RowSummary = _getCountriesStat()
+                RowSummary = GetCountriesStat()
             };
             return tabledata;
         }
@@ -106,7 +106,7 @@ namespace Covid19.Stats.Services
 
         public TableRowSummary[] GetCountriesWithoutDelta()
         {
-            var lastData = getLastData()
+            var lastData = GetLastData()
                       .GroupBy(
                       x => x.Country_Region,
                       x => new { x.Confirmed, x.Death })
